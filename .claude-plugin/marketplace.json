@@ -1,0 +1,42 @@
+{
+  "name": "genericsuite-skills",
+  "owner": {
+    "name": "Carlos Ramirez",
+    "email": "info@genericsuite.com"
+  },
+  "metadata": {
+    "description": "GenericSuite skills",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "code-generation-skills",
+      "description": "Collection of GenericSuite JSON config files and code generation capabilities",
+      "source": "./",
+      "strict": false,
+      "skills": [
+        "./skills/config-builder",
+        "./skills/jsx-code-builder"
+      ]
+    },
+    {
+      "name": "agents-skills",
+      "description": "Collection of agentic resources generation capabilities",
+      "source": "./",
+      "strict": false,
+      "skills": [
+        "./skills/build-agents-md",
+        "./skills/skill-creator"
+      ]
+    },
+    {
+      "name": "release-prep-skills",
+      "description": "Collection of Genericsuite release preparation capabilities",
+      "source": "./",
+      "strict": false,
+      "skills": [
+        "./skills/release-notes"
+      ]
+    }
+  ]
+}

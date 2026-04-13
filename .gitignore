@@ -205,3 +205,8 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+# Anthropic Claude Code
+skills/skill-creator
+.claude/settings.local.json
+jsx-code-builder-workspace
