@@ -104,3 +104,7 @@ For those skills that generate files or folders, use the `./playground/` folder 
 ## Key Schema References
 
 Full JSON schema definitions for evals.json, grading.json, and history.json are in [skills/skill-creator/references/schemas.md](skills/skill-creator/references/schemas.md).
+
+## Important Notes
+
+- The `AGENTS.md` file (if present) is a symlink to `CLAUDE.md` — edit only `CLAUDE.md`.
