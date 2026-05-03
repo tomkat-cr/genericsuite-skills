@@ -11,7 +11,7 @@ This is a **AI Skills Plugin Repository** for GenericSuite — a collection of A
 
 ## License
 
-[GenericSuite](https://genericsuite.carlosjramirez.com) is open-sourced software licensed under the ISC license.
+[GenericSuite](https://genericsuite.carlosjramirez.com) is open-sourced software licensed under the MIT license.
 
 ## Credits
 
