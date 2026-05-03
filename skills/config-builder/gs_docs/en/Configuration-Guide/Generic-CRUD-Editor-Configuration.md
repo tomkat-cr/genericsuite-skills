@@ -565,7 +565,7 @@ exampleapp/apps/config_dbdef/
 |   ├── users_food_times.json                   # User's typical meal ingestion times
 |   ├── users_profile.json                      # User's profile page
 |   ├── users_user_history.json                 # User's data history (goals, weight, etc.)
-|   ├── users.json                              # Users
+|   └── users.json                              # Users
 ├── frontend/
 |   ├── ai_chatbot_conversations_complete.json  # AI Chatbot conversations for a CRUD editor
 |   ├── ai_chatbot_conversations.json           # AI Chatbot conversations for the Chatbot UI
@@ -586,11 +586,11 @@ exampleapp/apps/config_dbdef/
 |   ├── users_food_times.json                   # User's typical meal ingestion times
 |   ├── users_profile.json                      # User's profile page
 |   ├── users_user_history.json                 # User's data history (goals, weight, etc.)
-|   ├── users.json                              # Users
+|   └── users.json                              # Users
 ├── .gitignore
 ├── CHANGELOG.md
 ├── package.json
-├── README.md
+└── README.md
 ```
 
 ### backend/ai_chatbot_conversations.json
