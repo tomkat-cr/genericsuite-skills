@@ -4,7 +4,7 @@
 
 **FastAPITemplate** is a full-stack application that allows you to have a template to start your FastAPI application based on GenericSuite.
 
-You can view the [Source Code here](https://github.com/tomkat-cr/genericsuite-basecamp/tree/main/docs/code/fastapitemplate).
+You can view the [Source Code here](https://github.com/tomkat-cr/genericsuite-basecamp/tree/main/mkdocs_root/code/fastapitemplate).
 
 
 ![FastAPITemplate Logo](./ui/src/_images/app_logo_horizontal.svg)
@@ -24,7 +24,7 @@ fastapitemplate/
 
 ```bash
 git clone https://github.com/tomkat-cr/genericsuite-basecamp.git
-cd genericsuite-basecamp/docs/code/fastapitemplate
+cd genericsuite-basecamp/mkdocs_root/code/fastapitemplate
 ```
 
 ## Configuration
@@ -131,7 +131,7 @@ cd ~/projects/myapp
 
 ```bash
 git clone --depth 1 https://github.com/tomkat-cr/genericsuite-basecamp.git _tmp
-cp -r _tmp/docs/code/fastapitemplate ~/projects/myapp
+cp -r _tmp/mkdocs_root/code/fastapitemplate ~/projects/myapp
 cp -r _tmp/scripts/rename-app.sh ~/projects/myapp/scripts/rename-app.sh
 rm -rf _tmp
 cd ~/projects/myapp

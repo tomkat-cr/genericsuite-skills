@@ -36,26 +36,26 @@ if [ "${BRANCH}" = "" ]; then
 fi
 
 # Configuration guide main document
-SOURCE_URL="https://raw.githubusercontent.com/tomkat-cr/genericsuite-basecamp/refs/heads/${BRANCH}/docs/en/Configuration-Guide/index.md"
+SOURCE_URL="https://raw.githubusercontent.com/tomkat-cr/genericsuite-basecamp/refs/heads/${BRANCH}/mkdocs_root/en/Configuration-Guide/index.md"
 DEST_DIR="skills/config-builder/gs_docs/en/Configuration-Guide"
 DEST_FILE="index.md"
 
 download_file "$SOURCE_URL" "$DEST_DIR" "$DEST_FILE"
 
 # Configuration guide JSON config files document
-SOURCE_URL="https://raw.githubusercontent.com/tomkat-cr/genericsuite-basecamp/refs/heads/${BRANCH}/docs/en/Configuration-Guide/Generic-CRUD-Editor-Configuration.md"
+SOURCE_URL="https://raw.githubusercontent.com/tomkat-cr/genericsuite-basecamp/refs/heads/${BRANCH}/mkdocs_root/en/Configuration-Guide/Generic-CRUD-Editor-Configuration.md"
 DEST_DIR="skills/config-builder/gs_docs/en/Configuration-Guide"
 DEST_FILE="Generic-CRUD-Editor-Configuration.md"
 
 download_file "$SOURCE_URL" "$DEST_DIR" "$DEST_FILE"
 
 # Documentation to use the "new-project-from-template.sh" script
-SOURCE_URL="https://raw.githubusercontent.com/tomkat-cr/genericsuite-basecamp/refs/heads/${BRANCH}/docs/code/fastapitemplate/README.md"
+SOURCE_URL="https://raw.githubusercontent.com/tomkat-cr/genericsuite-basecamp/refs/heads/${BRANCH}/mkdocs_root/code/fastapitemplate/README.md"
 DEST_DIR="skills/config-builder/gs_docs/code/fastapitemplate"
 DEST_FILE="README.md"
 
 # JSON config files schema validator
-SOURCE_URL="https://raw.githubusercontent.com/tomkat-cr/genericsuite-basecamp/refs/heads/${BRANCH}/docs/code/configuration-guide/crud_editor_config_classes.py"
+SOURCE_URL="https://raw.githubusercontent.com/tomkat-cr/genericsuite-basecamp/refs/heads/${BRANCH}/mkdocs_root/code/configuration-guide/crud_editor_config_classes.py"
 DEST_DIR="skills/config-builder/gs_docs/code/configuration-guide"
 DEST_FILE="crud_editor_config_classes.py"
 

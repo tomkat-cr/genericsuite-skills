@@ -43,9 +43,9 @@ Check the [Frontend directory](./index.md#frontend-directory) section in the [Ge
 
 The validation configuration defines the validation rules for the CRUD editor.
 
-The TypeScript interfaces to validate the frontend JSON configurations are defined in the [CrudEditorConfigInterface.ts](https://github.com/tomkat-cr/genericsuite-basecamp/blob/main/docs/code/configuration-guide/CrudEditorConfigInterface.ts) file (`FrontendCrudEditorConfig`, `ParentKeyName`, `FieldElement`, `FieldType`).
+The TypeScript interfaces to validate the frontend JSON configurations are defined in the [CrudEditorConfigInterface.ts](https://github.com/tomkat-cr/genericsuite-basecamp/blob/main/mkdocs_root/code/configuration-guide/CrudEditorConfigInterface.ts) file (`FrontendCrudEditorConfig`, `ParentKeyName`, `FieldElement`, `FieldType`).
 
-The Python classes to validate the frontend JSON configurations are defined in the [crud_editor_config_classes.py](https://github.com/tomkat-cr/genericsuite-basecamp/blob/main/docs/code/configuration-guide/crud_editor_config_classes.py) file (`FrontendCrudEditorConfig`, `ParentKeyName`, `FieldElement`, `FieldType`).
+The Python classes to validate the frontend JSON configurations are defined in the [crud_editor_config_classes.py](https://github.com/tomkat-cr/genericsuite-basecamp/blob/main/mkdocs_root/code/configuration-guide/crud_editor_config_classes.py) file (`FrontendCrudEditorConfig`, `ParentKeyName`, `FieldElement`, `FieldType`).
 
 ### General Configuration
 
@@ -442,9 +442,9 @@ This configuration is used by the backend exclusively.
 
 ### Validation
 
-The TypeScript interfaces to validate the backend JSON configurations are defined in [CrudEditorConfigInterface.ts](https://github.com/tomkat-cr/genericsuite-basecamp/blob/main/docs/code/configuration-guide/CrudEditorConfigInterface.ts) file (`BackendCrudEditorConfig`).
+The TypeScript interfaces to validate the backend JSON configurations are defined in [CrudEditorConfigInterface.ts](https://github.com/tomkat-cr/genericsuite-basecamp/blob/main/mkdocs_root/code/configuration-guide/CrudEditorConfigInterface.ts) file (`BackendCrudEditorConfig`).
 
-The Python classes to validate the backend JSON configurations are defined in [crud_editor_config_classes.py](https://github.com/tomkat-cr/genericsuite-basecamp/blob/main/docs/code/configuration-guide/crud_editor_config_classes.py) file (`BackendCrudEditorConfig`).
+The Python classes to validate the backend JSON configurations are defined in [crud_editor_config_classes.py](https://github.com/tomkat-cr/genericsuite-basecamp/blob/main/mkdocs_root/code/configuration-guide/crud_editor_config_classes.py) file (`BackendCrudEditorConfig`).
 
 ### Backend Configuration Attributes
 

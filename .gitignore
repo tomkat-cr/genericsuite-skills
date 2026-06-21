@@ -208,5 +208,13 @@ __marimo__/
 
 # Claude Code
 .claude/settings.local.json
+
+# AI Agents
+.claude
+.agents
+.codex
+.cursor
+.gemini
+
 skills/skill-creator
 jsx-code-builder-workspace
