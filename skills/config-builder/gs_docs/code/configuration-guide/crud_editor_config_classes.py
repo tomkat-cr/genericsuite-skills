@@ -19,6 +19,18 @@ FieldType = Literal[
 ]
 
 
+class SelectElementItem(BaseModel):
+    """
+    Inline select option: {title, value} object.
+    The GCE renderer reads option.title and option.value, so inline
+    select_elements arrays must use this shape (bare strings render
+    broken/empty options).
+    """
+    title: str = Field(..., description="Option label shown to the user")
+    value: Union[str, int, float, bool] = Field(
+        ..., description="Option value stored in the field")
+
+
 class ParentKeyName(BaseModel):
     """
     Definition of a parent key relationship
@@ -58,10 +70,11 @@ class FieldElement(BaseModel):
         None, description="Formula function name to calculate value from"
         " other fields")
     # Select specific
-    select_elements: Optional[str] = Field(
+    select_elements: Optional[Union[str, List[SelectElementItem]]] = Field(
         None,
         description="Select specific: ID for predefined select options"
-        " (e.g., 'TRUE_FALSE')"
+        " (e.g., 'TRUE_FALSE'), or an inline list of {title, value}"
+        " objects. An array of bare strings is NOT valid."
     )
     # Suggestion Dropdown specific attributes
     suggestion_id_fieldname: Optional[str] = Field(

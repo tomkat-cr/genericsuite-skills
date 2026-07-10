@@ -44,7 +44,7 @@ Ask the user the following questions (can be answered all at once):
 | `date` | Date only |
 | `datetime-local` | Date + time |
 | `email` | Email with validation |
-| `select` | Dropdown from a constant list (`select_elements` required) |
+| `select` | Dropdown from a constant list (`select_elements` required: a constant name string like `"GENDERS"` — preferred — or an inline array of `{"title": ..., "value": ...}` objects; NEVER an array of bare strings, which renders broken options at runtime) |
 | `select_table` | Dropdown from related table |
 | `select_component` | Dropdown from React component |
 | `suggestion_dropdown` | Autocomplete from API call |

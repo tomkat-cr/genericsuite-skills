@@ -48,10 +48,26 @@ For **each** config (master + all children), scan `fieldElements` and collect:
 
 | What to find | Where | Collect |
 |---|---|---|
-| `"type": "select"` with `"select_elements"` | fieldElements | Constant name (e.g. `GENDERS`) |
+| `"type": "select"` with `"select_elements"` | fieldElements | Constant name (e.g. `GENDERS`) — see validation below |
 | `"formula"` attribute | fieldElements | Formula function name |
 | `"aux_component"` attribute | fieldElements | Auxiliary component name (e.g. `ChatBotButton`) |
 | `"type": "component"` | fieldElements | Custom component name |
+
+### 2c-bis. Validate `select_elements` shape
+
+`GetFormData` only resolves `select_elements` through the registry when it is a
+**string** (constant name). Arrays pass through untouched, and the renderer
+(`putSelectOptionsFromArray` / `getSelectDescription`) reads `option.title` and
+`option.value` on each element. Therefore, for every `"type": "select"` field:
+
+- **String** (e.g. `"GENDERS"`) — valid; collect as a constant (step 2d).
+- **Array of `{title, value}` objects** — valid inline form; no constant import
+  or registry entry needed.
+- **Array of bare strings** (e.g. `["Asset", "Liability"]`) — **INVALID**: it
+  compiles but renders empty/broken select options at runtime. Do NOT generate
+  silently. Stop and tell the user, offering to fix the JSON config by either
+  (a) converting to `[{"title": "Asset", "value": "asset"}, ...]`, or
+  (b) extracting a named constant into `app_constants`.
 
 ### 2d. Classify constants
 
