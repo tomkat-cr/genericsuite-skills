@@ -26,6 +26,7 @@ Each skill directory contains:
 | `skills/build-agents-md/` | Generates AGENTS.md documentation for any project |
 | `skills/config-builder/` | Generates GenericSuite frontend/backend JSON config files for CRUD editors |
 | `skills/jsx-code-builder/` | Generates React JSX component files from GenericSuite frontend JSON configs |
+| `skills/menu-builder/` | Adds/updates menu entries in backend/app_main_menu.json (idempotent JSON merge) |
 | `skills/release-notes/` | Drafts bilingual (EN/ES) changelog entries |
 | `skills/skill-creator/` | Meta-skill for creating, testing, evaluating, and improving other skills |
 

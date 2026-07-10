@@ -1,0 +1,25 @@
+[
+    {
+        "title": "Home",
+        "location": "top_menu",
+        "type": "nav_link",
+        "path": "/",
+        "element": "HomePage",
+        "hard_prefix": false,
+        "reload": true
+    },
+    {
+        "title": "Billing",
+        "location": "top_menu",
+        "type": "nav_dropdown",
+        "sec_group": "users",
+        "sub_menu_options": [
+            {
+                "type": "editor",
+                "sec_group": "users",
+                "title": "Invoices",
+                "element": "Invoices_EditorData"
+            }
+        ]
+    }
+]
