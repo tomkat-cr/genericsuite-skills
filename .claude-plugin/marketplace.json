@@ -18,7 +18,8 @@
         "./skills/config-builder",
         "./skills/endpoints-builder",
         "./skills/jsx-code-builder",
-        "./skills/menu-builder"
+        "./skills/menu-builder",
+        "./skills/python-fastapi-code-builder"
       ]
     },
     {

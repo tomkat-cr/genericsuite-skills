@@ -1,0 +1,36 @@
+{
+    "skill_name": "python-fastapi-code-builder",
+    "evals": [
+        {
+            "id": 1,
+            "prompt": "Generate a GenericSuite FastAPI backend feature called currency_rates: a POST endpoint that receives {\"base\": str, \"symbols\": str} and returns exchange rates fetched from an external API (use requests.get against https://api.frankfurter.dev/v1/latest with params, api key not required). Domain folder: external_apis. JWT-protected. Project root: playground/python-fastapi-code-builder-test/eval-1/",
+            "expected_output": "lib/models/external_apis/currency_rates.py (model layer) and lib/routers/currency_rates.py (router) plus a main.py wiring snippet",
+            "files": [],
+            "expectations": [
+                "Creates lib/models/external_apis/currency_rates.py and lib/routers/currency_rates.py under the output root",
+                "Both files pass python3 -m py_compile (runtime validity)",
+                "The model file does NOT import fastapi (layer separation)",
+                "The model function signature is (request: AuthorizedRequest, blueprint: BlueprintOne, other_params: Optional[dict] = None) and it calls app_context_and_set_env",
+                "The model returns via return_resultset_jsonified_or_exception with the standard {error, error_message, resultset} shape",
+                "The router uses BlueprintOne, Depends(get_current_user), get_default_fa_request and router.set_current_request",
+                "The router validates the required 'base' parameter and returns the standard error shape with status_code 400 when missing",
+                "Outputs a main.py snippet using app.include_router with prefix f'/{settings.API_VERSION}/currency_rates'",
+                "Does NOT add anything to endpoints.json and explains why (custom routers are registered in main.py)"
+            ]
+        },
+        {
+            "id": 2,
+            "prompt": "Generate a GenericSuite FastAPI backend feature called invoice_totals: a POST endpoint that receives {\"customer_id\": str} and returns the number of invoices and the sum of their 'total' field for that customer, reading the invoices table through the GenericSuite DB middleware (backend config json_file 'invoices'). Domain folder: billing. Project root: playground/python-fastapi-code-builder-test/eval-2/",
+            "expected_output": "lib/models/billing/invoice_totals.py using fetch_all_from_db with MongoDB-style filtering, lib/routers/invoice_totals.py, and a main.py wiring snippet",
+            "files": [],
+            "expectations": [
+                "Creates lib/models/billing/invoice_totals.py, lib/models/billing/__init__.py and lib/routers/invoice_totals.py",
+                "All generated .py files pass python3 -m py_compile (runtime validity)",
+                "The model uses the GenericSuite DB middleware (e.g. fetch_all_from_db from genericsuite.util.generic_db_middleware) with json_file 'invoices' — no raw pymongo/SQL and no string-built queries",
+                "The model does NOT import fastapi",
+                "The result is returned in the standard {error, error_message, resultset} shape via return_resultset_jsonified_or_exception",
+                "The router validates customer_id and returns the standard error shape with status_code 400 when missing"
+            ]
+        }
+    ]
+}

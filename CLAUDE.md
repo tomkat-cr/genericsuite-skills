@@ -28,6 +28,7 @@ Each skill directory contains:
 | `skills/endpoints-builder/` | Adds/updates API endpoint registrations in backend/endpoints.json (idempotent JSON merge) |
 | `skills/jsx-code-builder/` | Generates React JSX component files from GenericSuite frontend JSON configs |
 | `skills/menu-builder/` | Adds/updates menu entries in backend/app_main_menu.json (idempotent JSON merge) |
+| `skills/python-fastapi-code-builder/` | Generates custom GenericSuite FastAPI routers + abstraction-layer model modules |
 | `skills/release-notes/` | Drafts bilingual (EN/ES) changelog entries |
 | `skills/skill-creator/` | Meta-skill for creating, testing, evaluating, and improving other skills |
 
