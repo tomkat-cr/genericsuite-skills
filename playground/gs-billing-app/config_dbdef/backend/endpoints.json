@@ -1,0 +1,17 @@
+[
+    {
+        "name": "invoices",
+        "url_prefix": "invoices",
+        "routes": [
+            {
+                "endpoint": "/",
+                "methods": ["GET", "POST", "PUT", "DELETE"],
+                "handler_type": "GenericEndpointHelper",
+                "view_func": "lib.util.generic_endpoint_builder.generic_route_handler",
+                "params": {
+                    "json_file": "invoices"
+                }
+            }
+        ]
+    }
+]

@@ -16,6 +16,7 @@
       "strict": false,
       "skills": [
         "./skills/config-builder",
+        "./skills/endpoints-builder",
         "./skills/jsx-code-builder",
         "./skills/menu-builder"
       ]

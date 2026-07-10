@@ -1,0 +1,39 @@
+{
+    "skill_name": "endpoints-builder",
+    "evals": [
+        {
+            "id": 1,
+            "prompt": "Register API endpoints for these gs-billing-app entities: invoices, invoice_lines and customers. Their configs are under playground/gs-billing-app/config_dbdef/ (frontend/ and backend/). The endpoints file is playground/gs-billing-app/config_dbdef/backend/endpoints.json. Write the updated file to playground/endpoints-builder-test/eval-1/endpoints.json (copy the original there first, then edit the copy).",
+            "expected_output": "endpoints.json gains customers and invoice_lines entries (invoice_lines is a subType table child); invoices skipped as already present",
+            "files": [
+                "playground/gs-billing-app/config_dbdef/backend/endpoints.json",
+                "playground/gs-billing-app/config_dbdef/frontend/invoices.json",
+                "playground/gs-billing-app/config_dbdef/frontend/invoice_lines.json",
+                "playground/gs-billing-app/config_dbdef/frontend/customers.json"
+            ],
+            "expectations": [
+                "Output file parses as valid JSON (runtime validity)",
+                "Contains exactly ONE entry with url_prefix 'invoices' (duplicate skipped, reported as already present)",
+                "Contains an entry with url_prefix 'invoice_lines' using GenericEndpointHelper and params.json_file 'invoice_lines' (child is subType table, so it IS registered)",
+                "Contains an entry with url_prefix 'customers' with methods GET, POST, PUT, DELETE",
+                "Every added route's view_func is 'lib.util.generic_endpoint_builder.generic_route_handler'",
+                "The pre-existing invoices entry is preserved unchanged"
+            ]
+        },
+        {
+            "id": 2,
+            "prompt": "The gs-billing-app has a child entity whose frontend config playground/endpoints-builder-test/fixtures/daily_notes.json has type child_listing and subType array. Register endpoints for it and for the vendors entity (playground/gs-billing-app/config_dbdef/frontend/vendors.json). Endpoints file: playground/gs-billing-app/config_dbdef/backend/endpoints.json. Write the result to playground/endpoints-builder-test/eval-2/endpoints.json (copy the original there first, then edit the copy).",
+            "expected_output": "vendors registered; daily_notes refused because subType array children live inside the parent document",
+            "files": [
+                "playground/gs-billing-app/config_dbdef/backend/endpoints.json",
+                "playground/gs-billing-app/config_dbdef/frontend/vendors.json"
+            ],
+            "expectations": [
+                "Output file parses as valid JSON (runtime validity)",
+                "No entry with url_prefix 'daily_notes' exists in the output",
+                "Explains that subType array children need no endpoint because their data lives in the parent document",
+                "Contains an entry with url_prefix 'vendors' using GenericEndpointHelper"
+            ]
+        }
+    ]
+}
