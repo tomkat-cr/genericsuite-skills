@@ -71,7 +71,7 @@ Custom-handler entry (only when the user supplies the handler):
         {
             "endpoint": "/",
             "methods": ["POST"],
-            "handler_type": "flask" ,
+            "handler_type": "flask",
             "view_func": "lib.models.<domain>.<module>.<function>",
             "params": {}
         }

@@ -37,7 +37,7 @@ def food_moments_crud(
         f' | request: {request}'
         )
     # Set environment variables from the database configurations.
-    app_context = app_context_and_set_env(request=request, blueprint=bp)
+    app_context = app_context_and_set_env(request=request, blueprint=blueprint)
     if app_context.has_error():
         return return_resultset_jsonified_or_exception(
             app_context.get_error_resultset()
@@ -62,7 +62,7 @@ def food_moment_in_user(
     if not other_params:
         other_params = {}
     # Set environment variables from the database configurations.
-    app_context = app_context_and_set_env(request=request, blueprint=bp)
+    app_context = app_context_and_set_env(request=request, blueprint=blueprint)
     if app_context.has_error():
         return return_resultset_jsonified_or_exception(
             app_context.get_error_resultset()

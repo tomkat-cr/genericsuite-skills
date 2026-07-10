@@ -16,6 +16,7 @@ bundled under `references/`:
 - `references/models/food_moments_model.py` — model layer using
   GenericDbHelper for DB access
 - `references/main.py` — how routers are registered with `include_router`
+- `references/crud_editor_config_classes.py` — Pydantic models for config_dbdef JSON files (use to validate entity config inputs)
 
 READ the relevant reference files before generating — they are the source of
 truth for idioms. Key architecture rules (non-negotiable):
@@ -206,7 +207,7 @@ Note: custom FastAPI routers do NOT go into `config_dbdef/backend/endpoints.json
 2. Lint if available: `flake8 <files>` (fall back to
    `python3 -m flake8`); fix any findings.
 3. Confirm the model layer imports nothing from `fastapi` (layer
-   separation): `grep -n "fastapi" lib/models/<domain>/<feature>.py`
+   separation): `grep -n "^from fastapi\|^import fastapi" lib/models/<domain>/<feature>.py`
    must return nothing.
 4. Summarize files created, the main.py wiring snippet, and remind the user
    to add tests and run the dev server (`make dev`).

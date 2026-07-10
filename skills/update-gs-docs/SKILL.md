@@ -1,6 +1,6 @@
 ---
 name: update-gs-docs
-description: Skill to update the GenericSuite documentation files used by the `config-builder` skill.
+description: Sync reference files from the genericsuite-basecamp repository into the skills that bundle them (config-builder, menu-builder, endpoints-builder, python-fastapi-code-builder). Map-driven via reference_map.txt; run after basecamp docs or code examples change, or when adding a new skill that needs basecamp exemplars.
 ---
 
 ## Scripts
