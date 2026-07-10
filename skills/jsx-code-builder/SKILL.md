@@ -248,7 +248,12 @@ export const InvoiceLines = ({parentData, handleFormPageActions}) => (
 
 ## Step 4 — Generate integration snippets
 
-After generating the JSX files, output these code snippets for the user to integrate into their existing files. Do NOT rewrite the full files — only show what needs to be added.
+After generating the JSX files, output these code snippets for the user to
+integrate into their existing files. Do NOT rewrite the full files — only
+show what needs to be added. For sections 4b (menu) and 4c (endpoints),
+prefer invoking the `menu-builder` and `endpoints-builder` skills to apply
+the changes idempotently; keep the snippets below as the fallback when those
+skills are not available.
 
 ### 4a. App.jsx — imports and componentMap
 
