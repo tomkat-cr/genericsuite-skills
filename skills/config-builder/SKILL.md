@@ -44,7 +44,7 @@ Ask the user the following questions (can be answered all at once):
 | `date` | Date only |
 | `datetime-local` | Date + time |
 | `email` | Email with validation |
-| `select` | Dropdown from a constant list (`select_elements` required) |
+| `select` | Dropdown from a constant list (`select_elements` required: a constant name string like `"GENDERS"` — preferred — or an inline array of `{"title": ..., "value": ...}` objects; NEVER an array of bare strings, which renders broken options at runtime) |
 | `select_table` | Dropdown from related table |
 | `select_component` | Dropdown from React component |
 | `suggestion_dropdown` | Autocomplete from API call |
@@ -130,21 +130,12 @@ Standard timestamp fields to include at the bottom:
 After generating the files, remind the user to:
 
 1. Add the React component to `App.jsx`'s `componentMap`
-2. Add the menu entry to `backend/app_main_menu.json`
-3. Add the API endpoint to `backend/endpoints.json` using this pattern:
-   ```json
-   {
-       "name": "<endpoint_url>",
-       "url_prefix": "<endpoint_url>",
-       "routes": [{
-           "endpoint": "/",
-           "methods": ["GET", "POST", "PUT", "DELETE"],
-           "handler_type": "GenericEndpointHelper",
-           "view_func": "lib.util.generic_endpoint_builder.generic_route_handler",
-           "params": { "json_file": "<entity>" }
-       }]
-   }
-   ```
+2. Add the menu entry to `backend/app_main_menu.json` — use the
+   `menu-builder` skill (`/menu-builder <ComponentName>`) to apply it
+   idempotently instead of editing by hand.
+3. Add the API endpoint to `backend/endpoints.json` — use the
+   `endpoints-builder` skill (`/endpoints-builder <entity>`); it skips
+   `subType: "array"` children automatically.
 4. Create the React component file `src/components/<ComponentName>/<ComponentName>.jsx`
 5. Run `make exampleapp-run` to test
 

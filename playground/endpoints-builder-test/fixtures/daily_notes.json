@@ -1,0 +1,16 @@
+{
+    "baseUrl": "daily_notes",
+    "title": "Daily Notes",
+    "name": "Daily Note",
+    "component": "DailyNotes",
+    "dbApiUrl": "daily_notes",
+    "type": "child_listing",
+    "subType": "array",
+    "array_name": "notes",
+    "parentUrl": "invoices",
+    "primaryKeyName": "id",
+    "fieldElements": [
+        {"name": "id", "required": true, "label": "ID", "type": "_id", "readonly": true, "hidden": true},
+        {"name": "note", "required": true, "label": "Note", "type": "text", "listing": true}
+    ]
+}

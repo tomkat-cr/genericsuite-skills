@@ -16,7 +16,10 @@
       "strict": false,
       "skills": [
         "./skills/config-builder",
-        "./skills/jsx-code-builder"
+        "./skills/endpoints-builder",
+        "./skills/jsx-code-builder",
+        "./skills/menu-builder",
+        "./skills/python-fastapi-code-builder"
       ]
     },
     {

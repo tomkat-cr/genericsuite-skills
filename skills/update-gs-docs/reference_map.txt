@@ -1,0 +1,25 @@
+# reference_map.txt — map of basecamp files to local skill reference copies
+# Format: <path relative to genericsuite-basecamp repo root>|<path relative to this repo root>
+# Lines starting with # and blank lines are ignored.
+
+# config-builder (legacy gs_docs layout, kept for path stability)
+mkdocs_root/en/Configuration-Guide/index.md|skills/config-builder/gs_docs/en/Configuration-Guide/index.md
+mkdocs_root/en/Configuration-Guide/Generic-CRUD-Editor-Configuration.md|skills/config-builder/gs_docs/en/Configuration-Guide/Generic-CRUD-Editor-Configuration.md
+mkdocs_root/code/configuration-guide/crud_editor_config_classes.py|skills/config-builder/gs_docs/code/configuration-guide/crud_editor_config_classes.py
+mkdocs_root/code/fastapitemplate/README.md|skills/config-builder/gs_docs/code/fastapitemplate/README.md
+scripts/new-project-from-template.sh|skills/config-builder/scripts/new-project-from-template.sh
+
+# menu-builder
+mkdocs_root/code/exampleapp/apps/config_dbdef/backend/app_main_menu.json|skills/menu-builder/references/app_main_menu.example.json
+
+# endpoints-builder
+mkdocs_root/code/exampleapp/apps/config_dbdef/backend/endpoints.json|skills/endpoints-builder/references/endpoints.example.json
+
+# python-fastapi-code-builder
+mkdocs_root/code/exampleapp/apps/api-fastapi/lib/routers/fda_food_endpoint.py|skills/python-fastapi-code-builder/references/routers/fda_food_endpoint.py
+mkdocs_root/code/exampleapp/apps/api-fastapi/lib/routers/food_moments.py|skills/python-fastapi-code-builder/references/routers/food_moments.py
+mkdocs_root/code/exampleapp/apps/api-fastapi/lib/models/external_apis/fda_food_endpoint.py|skills/python-fastapi-code-builder/references/models/fda_food_endpoint_model.py
+mkdocs_root/code/exampleapp/apps/api-fastapi/lib/models/admin_food/food_moments.py|skills/python-fastapi-code-builder/references/models/food_moments_model.py
+mkdocs_root/code/exampleapp/apps/api-fastapi/lib/models/ai_chatbot/ai_gpt_fn_app.py|skills/python-fastapi-code-builder/references/models/ai_gpt_fn_app_model.py
+mkdocs_root/code/exampleapp/apps/api-fastapi/lib/main.py|skills/python-fastapi-code-builder/references/main.py
+mkdocs_root/code/configuration-guide/crud_editor_config_classes.py|skills/python-fastapi-code-builder/references/crud_editor_config_classes.py

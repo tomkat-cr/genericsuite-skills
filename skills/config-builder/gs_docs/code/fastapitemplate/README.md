@@ -7,8 +7,8 @@
 You can view the [Source Code here](https://github.com/tomkat-cr/genericsuite-basecamp/tree/main/mkdocs_root/code/fastapitemplate).
 
 
-![FastAPITemplate Logo](./ui/src/_images/app_logo_horizontal.svg)
-![FastAPITemplate Bots Logo](./ui/src/_images/hack_team_logo_horizontal.svg)
+![FastAPITemplate Logo](./ui/src/images/app_logo_horizontal.svg)
+![FastAPITemplate Bots Logo](./ui/src/images/hack_team_logo_horizontal.svg)
 
 ## Directory Structure
 

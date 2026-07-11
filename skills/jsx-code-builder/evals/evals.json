@@ -1,65 +1,66 @@
 {
-  "skill_name": "jsx-code-builder",
-  "evals": [
-    {
-      "id": 1,
-      "prompt": "Generate the React JSX component files for the invoices editor. The master config is at playground/gs-billing-app/config_dbdef/frontend/invoices.json and it has a child component InvoiceLines whose config is at playground/gs-billing-app/config_dbdef/frontend/invoice_lines.json. Use 'BillingMenu' as the menu group folder. Output to playground/jsx-code-builder-test/eval-1/",
-      "expected_output": "Two JSX files: Invoices.jsx (master) and InvoiceLines.jsx (child), plus integration snippets for App.jsx, menu, and endpoints",
-      "files": [
-        "playground/gs-billing-app/config_dbdef/frontend/invoices.json",
-        "playground/gs-billing-app/config_dbdef/frontend/invoice_lines.json"
-      ],
-      "expectations": [
-        "Creates a file named Invoices.jsx in the BillingMenu directory",
-        "Creates a file named InvoiceLines.jsx in the BillingMenu directory",
-        "Invoices.jsx imports from 'genericsuite' and the invoices.json config",
-        "Invoices.jsx imports InvoiceLines from './InvoiceLines.jsx'",
-        "Invoices.jsx exports Invoices_EditorData function that calls GetFormData with the config, registry, and 'Invoices_EditorData' string",
-        "Invoices.jsx registry includes 'Invoices' and 'InvoiceLines' entries",
-        "Invoices.jsx exports Invoices component wrapping GenericCrudEditor",
-        "InvoiceLines.jsx exports component receiving {parentData, handleFormPageActions} props",
-        "InvoiceLines.jsx calls GetFormData with false as third argument",
-        "InvoiceLines.jsx passes parentData and handleFormPageActions to GenericCrudEditor",
-        "Outputs App.jsx integration snippet with componentMap entries for both Invoices and InvoiceLines",
-        "Outputs app_main_menu.json snippet with element 'Invoices_EditorData'",
-        "Outputs endpoints.json snippet for invoices and invoice_lines (since child is subType table)"
-      ]
-    },
-    {
-      "id": 2,
-      "prompt": "Generate React JSX components for the customers editor. The config is at playground/gs-billing-app/config_dbdef/frontend/customers.json. It has no child components. Use 'ContactsMenu' as the menu group. Output to playground/jsx-code-builder-test/eval-2/",
-      "expected_output": "One JSX file: Customers.jsx (master with no children), plus integration snippets",
-      "files": [
-        "playground/gs-billing-app/config_dbdef/frontend/customers.json"
-      ],
-      "expectations": [
-        "Creates a file named Customers.jsx in the ContactsMenu directory",
-        "Does NOT create any child component JSX files",
-        "Customers.jsx imports from 'genericsuite' and the customers.json config",
-        "Customers.jsx does NOT import any child components",
-        "Customers.jsx exports Customers_EditorData function that calls GetFormData",
-        "Customers.jsx registry includes 'Customers' entry but no child entries",
-        "Customers.jsx exports Customers component wrapping GenericCrudEditor as arrow function with no props",
-        "Outputs App.jsx integration snippet with componentMap entry for Customers only",
-        "Outputs app_main_menu.json snippet with element 'Customers_EditorData'"
-      ]
-    },
-    {
-      "id": 3,
-      "prompt": "Generate React JSX components for the accounts editor. The config is at playground/gs-billing-app/config_dbdef/frontend/accounts.json. It has a select field with inline select_elements (not a named constant). No child components. Use 'AccountingMenu' as the menu group. Output to playground/jsx-code-builder-test/eval-3/",
-      "expected_output": "One JSX file: Accounts.jsx with no constant imports needed (inline select_elements), plus integration snippets",
-      "files": [
-        "playground/gs-billing-app/config_dbdef/frontend/accounts.json"
-      ],
-      "expectations": [
-        "Creates a file named Accounts.jsx in the AccountingMenu directory",
-        "Accounts.jsx does NOT import from app_constants.jsx (the select_elements is an inline array, not a named constant)",
-        "Accounts.jsx exports Accounts_EditorData function that calls GetFormData",
-        "Accounts.jsx registry includes 'Accounts' entry",
-        "Accounts.jsx exports Accounts component wrapping GenericCrudEditor",
-        "Does NOT create any child component JSX files",
-        "Outputs App.jsx integration snippet with componentMap entry for Accounts"
-      ]
-    }
-  ]
+    "skill_name": "jsx-code-builder",
+    "evals": [
+        {
+            "id": 1,
+            "prompt": "Generate the React JSX component files for the invoices editor. The master config is at playground/gs-billing-app/config_dbdef/frontend/invoices.json and it has a child component InvoiceLines whose config is at playground/gs-billing-app/config_dbdef/frontend/invoice_lines.json. Use 'BillingMenu' as the menu group folder. Output to playground/jsx-code-builder-test/eval-1/",
+            "expected_output": "Two JSX files: Invoices.jsx (master) and InvoiceLines.jsx (child), plus integration snippets for App.jsx, menu, and endpoints",
+            "files": [
+                "playground/gs-billing-app/config_dbdef/frontend/invoices.json",
+                "playground/gs-billing-app/config_dbdef/frontend/invoice_lines.json"
+            ],
+            "expectations": [
+                "Creates a file named Invoices.jsx in the BillingMenu directory",
+                "Creates a file named InvoiceLines.jsx in the BillingMenu directory",
+                "Invoices.jsx imports from 'genericsuite' and the invoices.json config",
+                "Invoices.jsx imports InvoiceLines from './InvoiceLines.jsx'",
+                "Invoices.jsx exports Invoices_EditorData function that calls GetFormData with the config, registry, and 'Invoices_EditorData' string",
+                "Invoices.jsx registry includes 'Invoices' and 'InvoiceLines' entries",
+                "Invoices.jsx exports Invoices component wrapping GenericCrudEditor",
+                "InvoiceLines.jsx exports component receiving {parentData, handleFormPageActions} props",
+                "InvoiceLines.jsx calls GetFormData with false as third argument",
+                "InvoiceLines.jsx passes parentData and handleFormPageActions to GenericCrudEditor",
+                "Outputs App.jsx integration snippet with componentMap entries for both Invoices and InvoiceLines",
+                "Outputs app_main_menu.json snippet with element 'Invoices_EditorData'",
+                "Outputs endpoints.json snippet for invoices and invoice_lines (since child is subType table)"
+            ]
+        },
+        {
+            "id": 2,
+            "prompt": "Generate React JSX components for the customers editor. The config is at playground/gs-billing-app/config_dbdef/frontend/customers.json. It has no child components. Use 'ContactsMenu' as the menu group. Output to playground/jsx-code-builder-test/eval-2/",
+            "expected_output": "One JSX file: Customers.jsx (master with no children), plus integration snippets",
+            "files": [
+                "playground/gs-billing-app/config_dbdef/frontend/customers.json"
+            ],
+            "expectations": [
+                "Creates a file named Customers.jsx in the ContactsMenu directory",
+                "Does NOT create any child component JSX files",
+                "Customers.jsx imports from 'genericsuite' and the customers.json config",
+                "Customers.jsx does NOT import any child components",
+                "Customers.jsx exports Customers_EditorData function that calls GetFormData",
+                "Customers.jsx registry includes 'Customers' entry but no child entries",
+                "Customers.jsx exports Customers component wrapping GenericCrudEditor as arrow function with no props",
+                "Outputs App.jsx integration snippet with componentMap entry for Customers only",
+                "Outputs app_main_menu.json snippet with element 'Customers_EditorData'"
+            ]
+        },
+        {
+            "id": 3,
+            "prompt": "Generate React JSX components for the accounts editor. The config is at playground/gs-billing-app/config_dbdef/frontend/accounts.json. It has a select field with inline select_elements as an array of {title, value} objects (not a named constant). No child components. Use 'AccountingMenu' as the menu group. Output to playground/jsx-code-builder-test/eval-3/",
+            "expected_output": "One JSX file: Accounts.jsx with no constant imports needed (inline {title, value} select_elements), plus integration snippets",
+            "files": [
+                "playground/gs-billing-app/config_dbdef/frontend/accounts.json"
+            ],
+            "expectations": [
+                "Creates a file named Accounts.jsx in the AccountingMenu directory",
+                "Accounts.jsx does NOT import from app_constants.jsx (the select_elements is an inline array of {title, value} objects, not a named constant)",
+                "Accounts.jsx exports Accounts_EditorData function that calls GetFormData",
+                "Accounts.jsx registry includes 'Accounts' entry",
+                "Accounts.jsx exports Accounts component wrapping GenericCrudEditor",
+                "Does NOT create any child component JSX files",
+                "Outputs App.jsx integration snippet with componentMap entry for Accounts",
+                "Validates select_elements shape: a string constant name or an array of {title, value} objects is accepted; an array of bare strings is flagged as invalid (would render broken select options at runtime) instead of generating silently"
+            ]
+        }
+    ]
 }

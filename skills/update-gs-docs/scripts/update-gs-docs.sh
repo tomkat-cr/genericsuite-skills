@@ -1,72 +1,79 @@
-#!/usr/bin/env bash
+#!/bin/bash
 # skills/update-gs-docs/scripts/update-gs-docs.sh
-# 2026-04-11 | CR
-# Update files required by the GenericSuite skills operations
+# Map-driven sync of reference files from genericsuite-basecamp into the
+# skills' references/ (and legacy gs_docs/) directories.
+#
+# Usage:
+#   bash skills/update-gs-docs/scripts/update-gs-docs.sh [branch]
+#   BASECAMP_DIR=/path/to/genericsuite-basecamp bash skills/update-gs-docs/scripts/update-gs-docs.sh
+#
+# Modes:
+#   - If BASECAMP_DIR is set (or ../genericsuite-basecamp exists), copy files
+#     from the local checkout (fast, works offline).
+#   - Otherwise download each file from GitHub raw on the given branch
+#     (default: develop).
+set -euo pipefail
 
-download_file() {
-  local url_index="$1"
-  local dest_dir="$2"
-  local dest_file="$3"
-  local dest_filespec="$dest_dir/$dest_file"
-
-  echo ""
-  echo "Ensuring directory exists: $dest_dir"
-  mkdir -p "$dest_dir"
-
-  echo "Downloading index.md from develop branch..."
-  curl -sSL "$url_index" -o "$dest_filespec"
-  if [ $? -eq 0 ]; then
-    echo "Successfully updated $dest_filespec"
-  else
-    echo "Failed to update $dest_filespec"
-  fi  
-}
-
-# Get absolute path to the generic workspace root, assuming the script is run from anywhere within it
-# To be safe, we'll navigate relative to this script or assume we run it from repo root.
-# Getting repo root relative to the script location
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" &> /dev/null && pwd)"
-REPO_ROOT="$(dirname "$(dirname "$(dirname "$SCRIPT_DIR")")")"
+REPO_ROOT="$(dirname "$(dirname "$(dirname "${SCRIPT_DIR}")")")"
+MAP_FILE="${REPO_ROOT}/skills/update-gs-docs/reference_map.txt"
 
-cd "$REPO_ROOT" || exit 1
+BRANCH="${1:-develop}"
+BASECAMP_DIR="${BASECAMP_DIR:-}"
+RAW_BASE="https://raw.githubusercontent.com/tomkat-cr/genericsuite-basecamp/refs/heads/${BRANCH}"
 
-BRANCH="$1"
-if [ "${BRANCH}" = "" ]; then
-  BRANCH="develop"
+if [ -z "${BASECAMP_DIR}" ] && [ -d "${REPO_ROOT}/../genericsuite-basecamp" ]; then
+    BASECAMP_DIR="${REPO_ROOT}/../genericsuite-basecamp"
 fi
 
-# Configuration guide main document
-SOURCE_URL="https://raw.githubusercontent.com/tomkat-cr/genericsuite-basecamp/refs/heads/${BRANCH}/mkdocs_root/en/Configuration-Guide/index.md"
-DEST_DIR="skills/config-builder/gs_docs/en/Configuration-Guide"
-DEST_FILE="index.md"
+if [ ! -f "${MAP_FILE}" ]; then
+    echo "Error: map file not found: ${MAP_FILE}"
+    exit 1
+fi
 
-download_file "$SOURCE_URL" "$DEST_DIR" "$DEST_FILE"
+changed=0
+unchanged=0
+failed=0
+tmp_file=""
 
-# Configuration guide JSON config files document
-SOURCE_URL="https://raw.githubusercontent.com/tomkat-cr/genericsuite-basecamp/refs/heads/${BRANCH}/mkdocs_root/en/Configuration-Guide/Generic-CRUD-Editor-Configuration.md"
-DEST_DIR="skills/config-builder/gs_docs/en/Configuration-Guide"
-DEST_FILE="Generic-CRUD-Editor-Configuration.md"
+# Remove the current iteration's temp file on exit or interrupt
+trap 'rm -f "${tmp_file}"' EXIT INT TERM
 
-download_file "$SOURCE_URL" "$DEST_DIR" "$DEST_FILE"
-
-# Documentation to use the "new-project-from-template.sh" script
-SOURCE_URL="https://raw.githubusercontent.com/tomkat-cr/genericsuite-basecamp/refs/heads/${BRANCH}/mkdocs_root/code/fastapitemplate/README.md"
-DEST_DIR="skills/config-builder/gs_docs/code/fastapitemplate"
-DEST_FILE="README.md"
-
-# JSON config files schema validator
-SOURCE_URL="https://raw.githubusercontent.com/tomkat-cr/genericsuite-basecamp/refs/heads/${BRANCH}/mkdocs_root/code/configuration-guide/crud_editor_config_classes.py"
-DEST_DIR="skills/config-builder/gs_docs/code/configuration-guide"
-DEST_FILE="crud_editor_config_classes.py"
-
-download_file "$SOURCE_URL" "$DEST_DIR" "$DEST_FILE"
-
-# Script to build a new monorepo project from a template
-SOURCE_URL="https://raw.githubusercontent.com/tomkat-cr/genericsuite-basecamp/${BRANCH}/scripts/new-project-from-template.sh"
-DEST_DIR="skills/config-builder/scripts"
-DEST_FILE="new-project-from-template.sh"
-
-download_file "$SOURCE_URL" "$DEST_DIR" "$DEST_FILE"
+while IFS='|' read -r src dest; do
+    # Skip comments and blank lines
+    case "${src}" in
+        \#*|"") continue ;;
+    esac
+    dest_path="${REPO_ROOT}/${dest}"
+    mkdir -p "$(dirname "${dest_path}")"
+    tmp_file="$(mktemp)"
+    if [ -n "${BASECAMP_DIR}" ]; then
+        if ! cp "${BASECAMP_DIR}/${src}" "${tmp_file}" 2>/dev/null; then
+            echo "FAILED (local copy): ${src}"
+            failed=$((failed + 1))
+            rm -f "${tmp_file}"
+            continue
+        fi
+    else
+        if ! curl -fsSL "${RAW_BASE}/${src}" -o "${tmp_file}"; then
+            echo "FAILED (download): ${src}"
+            failed=$((failed + 1))
+            rm -f "${tmp_file}"
+            continue
+        fi
+    fi
+    if [ -f "${dest_path}" ] && cmp -s "${tmp_file}" "${dest_path}"; then
+        unchanged=$((unchanged + 1))
+        rm -f "${tmp_file}"
+    else
+        mv "${tmp_file}" "${dest_path}"
+        echo "CHANGED: ${dest}"
+        changed=$((changed + 1))
+    fi
+done < "${MAP_FILE}"
 
 echo ""
-echo "Documentation update complete."
+echo "Reference sync complete: ${changed} changed, ${unchanged} unchanged, ${failed} failed."
+if [ "${failed}" -gt 0 ]; then
+    exit 1
+fi

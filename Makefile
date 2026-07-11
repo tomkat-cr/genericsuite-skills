@@ -5,8 +5,10 @@ SHELL := /bin/bash
 help:
 	cat Makefile
 
-update-gs-docs:
-	bash skills/update-gs-docs/scripts/update-gs-docs.sh
+update-gs-docs: sync-references
+
+sync-references:
+	bash skills/update-gs-docs/scripts/update-gs-docs.sh $(BRANCH)
 
 sast-test:
 	snyk code test --severity-threshold=high --all-projects .
