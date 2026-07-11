@@ -26,6 +26,7 @@ Each skill directory contains:
 | `skills/build-agents-md/` | Generates AGENTS.md documentation for any project |
 | `skills/config-builder/` | Generates GenericSuite frontend/backend JSON config files for CRUD editors |
 | `skills/endpoints-builder/` | Adds/updates API endpoint registrations in backend/endpoints.json (idempotent JSON merge) |
+| `skills/jsx-ai-code-builder/` | Adds AI features to the React frontend (field chat buttons, chatbot page, genericsuite-ai App shell) |
 | `skills/jsx-code-builder/` | Generates React JSX component files from GenericSuite frontend JSON configs |
 | `skills/mcp-builder/` | Builds/extends the MCP server exposing the app's AI tools (*_func wrappers, auth, prompts, client configs) |
 | `skills/menu-builder/` | Adds/updates menu entries in backend/app_main_menu.json (idempotent JSON merge) |
