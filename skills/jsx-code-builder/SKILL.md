@@ -83,7 +83,7 @@ Separate constants into two categories:
 
 ### 2e. Classify auxiliary components
 
-- `ChatBotButton` → requires `import * as gsAi from "genericsuite-ai"` and `const ChatBotButton = gsAi.ChatBotButton;`
+- `ChatBotButton` → requires `import * as gsAi from "genericsuite-ai"` and `const ChatBotButton = gsAi.ChatBotButton;` (to ADD AI buttons to fields that don't have them yet — or to wire the chatbot page — use the `jsx-ai-code-builder` skill)
 - Any other auxiliary component → ask the user for the import source
 
 ## Step 3 — Generate JSX files
