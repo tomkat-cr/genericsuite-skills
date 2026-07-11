@@ -20,6 +20,7 @@
         "./skills/jsx-code-builder",
         "./skills/menu-builder",
         "./skills/python-ai-code-builder",
+        "./skills/python-ai-tools-code-builder",
         "./skills/python-fastapi-code-builder"
       ]
     },
