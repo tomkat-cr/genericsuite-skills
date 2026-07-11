@@ -1,5 +1,7 @@
 """
 AI Langchain Tools and GPT functions management
+(eval fixture — intentionally partial: only the functions dict and cac
+list are populated; used for byte-comparison in evals, not as an exemplar)
 """
 from genericsuite.util.app_logger import log_debug
 from genericsuite.util.app_context import AppContext
@@ -77,6 +79,7 @@ def additional_run_one_function(
     Filled by the python-ai-tools-code-builder skill.
     """
     available_functions = get_functions_dict(app_context)
+    fuction_to_call = available_functions[function_name]  # used by the per-tool branches below
     _ = DEBUG and log_debug(
         f'RUN_ONE_FUNCTION | function_name: {function_name}'
         f' | function_args: {function_args}')

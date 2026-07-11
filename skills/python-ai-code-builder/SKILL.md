@@ -48,9 +48,10 @@ File: `lib/routers/ai_assistant.py`. Copy the structure of
   `gs_request, other_params = get_default_fa_request(...)`, calls
   `router.set_current_request(request, gs_request)`, then delegates to the
   `genericsuite_ai` model function with
-  `additional_callable=assign_app_gpt_functions` (imported from
-  `lib.models.ai_chatbot.ai_gpt_fn_index` as
-  `assign_app_specific_gpt_functions`).
+  `additional_callable=assign_app_gpt_functions` (the router imports
+  `assign_app_specific_gpt_functions` from
+  `lib.models.ai_chatbot.ai_gpt_fn_index` aliased as
+  `assign_app_gpt_functions`).
 - The chatbot endpoint passes `sendfile_callable=send_file_fa` and
   `background_tasks=background_tasks`.
 
@@ -134,6 +135,7 @@ def additional_run_one_function(
     Filled by the python-ai-tools-code-builder skill.
     """
     available_functions = get_functions_dict(app_context)
+    fuction_to_call = available_functions[function_name]  # used by the per-tool branches below
     _ = DEBUG and log_debug(
         f'RUN_ONE_FUNCTION | function_name: {function_name}'
         f' | function_args: {function_args}')
