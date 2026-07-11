@@ -24,8 +24,13 @@ READ the reference files before generating. Conventions (non-negotiable):
 3. **Params**: a Pydantic `BaseModel` schema per tool;
    `interpret_tool_params(tool_params=params, first_param_name=..., schema=...)`
    normalizes the input.
-4. **Errors**: return `gpt_func_error(<message>)` on failure; results are
-   strings or JSON-dumped dicts of the standard result shape.
+4. **Responses**: two canonical idioms — `gpt_func_error(<message>)` on
+   failure with a string/JSON-dumped success result (see
+   `references/ai_gpt_fn_fda.py`), or `standard_gpt_func_response(result,
+   ...)` from `genericsuite_ai.lib.ai_utilities` which shapes both success
+   and error from a standard-result-shape dict (see
+   `references/ai_gpt_fn_app.py`, the idiom for DB-middleware-backed
+   tools). Pick ONE per module and use it consistently.
 5. **Security**: any URL that comes from tool params or AI output must be
    checked with `is_safe_url()` before fetching; any local path with
    `is_safe_local_path()`. Never log raw user input (sanitize newlines).
@@ -99,7 +104,10 @@ def <tool_name>_func(params: Any) -> str:
     <param> = params.<param>
     # ... business logic; on failure:
     #     return gpt_func_error('<what failed>')
-    # On success return a string or json.dumps(result)
+    # On success return a string or json.dumps(result).
+    # DB-middleware-backed tools may instead return
+    # standard_gpt_func_response(result, ...) for both paths
+    # (see references/ai_gpt_fn_app.py).
     result = {"error": False, "error_message": None, "resultset": {}}
     return json.dumps(result)
 ```
