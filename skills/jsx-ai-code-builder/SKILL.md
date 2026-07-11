@@ -104,6 +104,9 @@ Read `src/components/App/App.jsx`:
   with `<GsAiApp ...same props...>`. Preserve `appLogo`,
   `appLogoHeader`, `componentMap` and every componentMap entry
   byte-for-byte.
+  When the old shell was used via `import * as gs from "genericsuite"` +
+  `gs.App`, add the new `genericsuite-ai` import and keep the `import *
+  as gs` line only if other `gs.*` references remain in the file.
 
 ### 3b. Menu entry
 
@@ -121,6 +124,12 @@ hamburger/User Menu group if present) — prefer invoking the
     "element": "Chatbot"
 }
 ```
+
+When delegating to `menu-builder`, two of its defaults do NOT apply here:
+its "element must be registered in componentMap" reminder is wrong for
+`Chatbot` (the genericsuite-ai App shell provides it — never add it to
+componentMap), and instead of appending at the end of the array, place
+this entry before the hamburger/User Menu group when one exists.
 
 `Chatbot` is provided by the genericsuite-ai App shell — do NOT add it to
 componentMap and do NOT create a component file. Skip if an entry with
