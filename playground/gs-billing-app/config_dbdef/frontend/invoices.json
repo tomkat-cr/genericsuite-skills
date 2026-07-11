@@ -1,0 +1,69 @@
+{
+    "baseUrl": "invoices",
+    "title": "Invoices",
+    "name": "Invoice",
+    "component": "Invoices",
+    "dbApiUrl": "invoices",
+    "childComponents": [
+        "InvoiceLines"
+    ],
+    "fieldElements": [
+        {
+            "name": "id",
+            "required": true,
+            "label": "ID",
+            "type": "_id",
+            "readonly": true,
+            "hidden": true
+        },
+        {
+            "name": "user_id",
+            "required": true,
+            "label": "User ID",
+            "type": "text",
+            "readonly": true,
+            "hidden": true
+        },
+        {
+            "name": "customer_id",
+            "required": true,
+            "label": "Customer",
+            "type": "select_table",
+            "listing": true
+        },
+        {
+            "name": "invoice_date",
+            "required": true,
+            "label": "Date",
+            "type": "date",
+            "listing": true
+        },
+        {
+            "name": "total",
+            "required": true,
+            "label": "Total Amount",
+            "type": "number",
+            "listing": true
+        },
+        {
+            "name": "creation_date",
+            "required": true,
+            "label": "Created",
+            "type": "datetime-local",
+            "readonly": true,
+            "hidden": false,
+            "default_value": "current_timestamp",
+            "listing": true
+        },
+        {
+            "name": "update_date",
+            "required": true,
+            "label": "Last update",
+            "type": "datetime-local",
+            "readonly": true,
+            "hidden": false,
+            "default_value": "current_timestamp",
+            "listing": false
+        }
+    ]
+}

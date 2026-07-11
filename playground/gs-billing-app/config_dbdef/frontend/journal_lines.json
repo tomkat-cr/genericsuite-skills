@@ -1,0 +1,75 @@
+{
+    "baseUrl": "journal_lines",
+    "title": "Journal Lines",
+    "name": "Journal Line",
+    "component": "JournalLines",
+    "dbApiUrl": "journal_lines",
+    "type": "child_listing",
+    "subType": "table",
+    "parentUrl": "journal_entries",
+    "endpointKeyNames": [
+        {
+            "parameterName": "journal_entries_id",
+            "parentElementName": "id"
+        }
+    ],
+    "fieldElements": [
+        {
+            "name": "id",
+            "required": true,
+            "label": "ID",
+            "type": "_id",
+            "readonly": true,
+            "hidden": true
+        },
+        {
+            "name": "user_id",
+            "required": true,
+            "label": "User ID",
+            "type": "text",
+            "readonly": true,
+            "hidden": true
+        },
+        {
+            "name": "account_id",
+            "required": true,
+            "label": "Account",
+            "type": "select_table",
+            "listing": true
+        },
+        {
+            "name": "debit",
+            "required": false,
+            "label": "Debit",
+            "type": "number",
+            "listing": true
+        },
+        {
+            "name": "credit",
+            "required": false,
+            "label": "Credit",
+            "type": "number",
+            "listing": true
+        },
+        {
+            "name": "creation_date",
+            "required": true,
+            "label": "Created",
+            "type": "datetime-local",
+            "readonly": true,
+            "hidden": false,
+            "default_value": "current_timestamp",
+            "listing": true
+        },
+        {
+            "name": "update_date",
+            "required": true,
+            "label": "Last update",
+            "type": "datetime-local",
+            "readonly": true,
+            "hidden": false,
+            "default_value": "current_timestamp",
+            "listing": false
+        }
+    ]
+}
