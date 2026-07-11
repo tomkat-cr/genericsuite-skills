@@ -43,3 +43,8 @@ mkdocs_root/code/fastapitemplate/mcp-server/claude_desktop_http_config.json|skil
 mkdocs_root/code/fastapitemplate/mcp-server/vscode_mcp_stdio_config.json|skills/mcp-builder/references/vscode_mcp_stdio_config.json
 mkdocs_root/code/fastapitemplate/mcp-server/vscode_mcp_http_config.json|skills/mcp-builder/references/vscode_mcp_http_config.json
 mkdocs_root/code/fastapitemplate/mcp-server/README.md|skills/mcp-builder/references/mcp-server-README.md
+
+# jsx-ai-code-builder
+mkdocs_root/code/exampleapp/apps/ui/src/components/UsersMenu/UserIngredients.jsx|skills/jsx-ai-code-builder/references/UserIngredients.example.jsx
+mkdocs_root/code/exampleapp/apps/ui/src/components/App/App.jsx|skills/jsx-ai-code-builder/references/App.example.jsx
+mkdocs_root/code/exampleapp/apps/config_dbdef/frontend/user_ingredients.json|skills/jsx-ai-code-builder/references/user_ingredients.example.json
