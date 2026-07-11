@@ -1,0 +1,41 @@
+{
+    "skill_name": "jsx-ai-code-builder",
+    "evals": [
+        {
+            "id": 1,
+            "prompt": "Add an AI chat button to the 'name' field of the customers editor. Chatbot prompt: 'Give me a company profile summary for the customer named %s, including industry and typical billing terms.'. No Google popup. The frontend config is playground/gs-billing-app/config_dbdef/frontend/customers.json and the component is playground/gs-billing-app/ui-fixtures/src/components/ContactsMenu/Customers.jsx. Copy both into playground/jsx-ai-code-builder-test/eval-1/ (preserving the relative layout: config_dbdef/frontend/customers.json and src/components/ContactsMenu/Customers.jsx) and edit the copies only.",
+            "expected_output": "customers.json gains chatbot_popup/aux_component/chatbot_prompt on the name field; Customers.jsx gains the gsAi import, ChatBotButton alias and registry entry",
+            "files": [
+                "playground/gs-billing-app/config_dbdef/frontend/customers.json",
+                "playground/gs-billing-app/ui-fixtures/src/components/ContactsMenu/Customers.jsx"
+            ],
+            "expectations": [
+                "The edited customers.json parses as valid JSON (runtime validity)",
+                "The 'name' field element has chatbot_popup true, aux_component 'ChatBotButton' and the exact chatbot_prompt text with %s; its original name/label/type attributes are unchanged",
+                "No google_popup/google_prompt attributes were added (not requested)",
+                "Customers.jsx contains exactly one `import * as gsAi from \"genericsuite-ai\"`, one `const ChatBotButton = gsAi.ChatBotButton;` and one `\"ChatBotButton\": ChatBotButton,` registry entry",
+                "Customers.jsx contains no dangerouslySetInnerHTML",
+                "All other fields in customers.json and all other registry entries in Customers.jsx are unchanged",
+                "The original files under playground/gs-billing-app/ are untouched"
+            ]
+        },
+        {
+            "id": 2,
+            "prompt": "Wire the AI chatbot page into the gs-billing-app frontend: migrate the App shell to genericsuite-ai and add the assistant menu entry titled 'Billing Assistant'. The App component is playground/gs-billing-app/ui-fixtures/src/components/App/App.jsx and the menu file is playground/gs-billing-app/config_dbdef/backend/app_main_menu.json. Copy both into playground/jsx-ai-code-builder-test/eval-2/ (layout: src/components/App/App.jsx and config_dbdef/backend/app_main_menu.json) and edit the copies only.",
+            "expected_output": "App.jsx imports the genericsuite-ai App shell with componentMap preserved; menu gains one /chatbot nav_link with element 'Chatbot'",
+            "files": [
+                "playground/gs-billing-app/ui-fixtures/src/components/App/App.jsx",
+                "playground/gs-billing-app/config_dbdef/backend/app_main_menu.json"
+            ],
+            "expectations": [
+                "The edited app_main_menu.json parses as valid JSON (runtime validity)",
+                "App.jsx imports `{ App as GsAiApp } from \"genericsuite-ai\"` and renders <GsAiApp with the same appLogo, appLogoHeader and componentMap props; no `from \"genericsuite\"` App import remains",
+                "The componentMap object still contains exactly Invoices, Customers and HomePage — no 'Chatbot' entry was added to it",
+                "The menu contains exactly one entry with path '/chatbot': type nav_link, location top_menu, sec_group users, title 'Billing Assistant', element 'Chatbot'",
+                "All pre-existing menu entries (Home nav_link, Billing group) are unchanged",
+                "No component file was created for the Chatbot element",
+                "The original files under playground/gs-billing-app/ are untouched"
+            ]
+        }
+    ]
+}

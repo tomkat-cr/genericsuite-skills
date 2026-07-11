@@ -17,6 +17,7 @@
       "skills": [
         "./skills/config-builder",
         "./skills/endpoints-builder",
+        "./skills/jsx-ai-code-builder",
         "./skills/jsx-code-builder",
         "./skills/mcp-builder",
         "./skills/menu-builder",
