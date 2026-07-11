@@ -1,0 +1,33 @@
+{
+    "skill_name": "mcp-builder",
+    "evals": [
+        {
+            "id": 1,
+            "prompt": "Build an MCP server for the gs-billing-app backend. Its AI tools live in playground/gs-billing-app/ai-fixtures/lib/models/ai_chatbot/ai_gpt_fn_billing.py (copy the whole playground/gs-billing-app/ai-fixtures/lib/ tree to playground/mcp-builder-test/eval-1/lib/ first). Expose all tools; no CRUD entities. Create the server as playground/mcp-builder-test/eval-1/mcp-server/mcp_server.py with the full sibling-directory scaffolding (package.json, client configs, README).",
+            "expected_output": "mcp_server.py wrapping get_invoice_status_func plus auth tools, and the mcp-server directory scaffolding with app-specific names",
+            "files": [
+                "playground/gs-billing-app/ai-fixtures/lib/models/ai_chatbot/ai_gpt_fn_billing.py"
+            ],
+            "expectations": [
+                "Creates mcp-server/mcp_server.py that passes python3 -m py_compile (runtime validity)",
+                "The server imports cac as cac_billing and get_invoice_status_func from lib.models.ai_chatbot.ai_gpt_fn_billing, and cac_billing is in cac_object_list",
+                "Has an async @mcp.tool() get_invoice_status with a typed invoice_id parameter that calls verify_app_context, delegates to get_invoice_status_func({...}) and returns tool_result(result)",
+                "Has the standard auth block: get_api_keys tool, authentication_tool using mcp_authenticate, and the user://login resource",
+                "All four client config JSON files parse and contain the app's own server name — none contain the string 'genericsuite-codegen' (runtime validity + stale-template check)",
+                "package.json parses as valid JSON"
+            ]
+        },
+        {
+            "id": 2,
+            "prompt": "EXTEND an existing MCP server: first copy playground/mcp-builder-test/eval-1/ (produced by eval 1; if absent, build it per eval 1 first) to playground/mcp-builder-test/eval-2/. A new tool module playground/mcp-builder-test/eval-2/lib/models/ai_chatbot/ai_gpt_fn_finance.py must be created first as a copy of ai_gpt_fn_billing.py with get_invoice_status renamed to fetch_exchange_rate everywhere (including the cac import alias context). Then run mcp-builder on playground/mcp-builder-test/eval-2/ to add the new tool to mcp-server/mcp_server.py.",
+            "expected_output": "mcp_server.py gains the fetch_exchange_rate wrapper and cac_finance; the existing get_invoice_status wrapper is untouched and not duplicated",
+            "files": [],
+            "expectations": [
+                "The extended mcp_server.py passes python3 -m py_compile (runtime validity)",
+                "Contains exactly ONE @mcp.tool() wrapper for get_invoice_status and exactly ONE for fetch_exchange_rate (no duplicates)",
+                "cac_object_list contains both cac_billing and cac_finance",
+                "Reports which wrappers were added and which were skipped as already present"
+            ]
+        }
+    ]
+}

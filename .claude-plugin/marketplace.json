@@ -18,6 +18,7 @@
         "./skills/config-builder",
         "./skills/endpoints-builder",
         "./skills/jsx-code-builder",
+        "./skills/mcp-builder",
         "./skills/menu-builder",
         "./skills/python-ai-code-builder",
         "./skills/python-ai-tools-code-builder",
