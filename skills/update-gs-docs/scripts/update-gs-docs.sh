@@ -34,6 +34,10 @@ fi
 changed=0
 unchanged=0
 failed=0
+tmp_file=""
+
+# Remove the current iteration's temp file on exit or interrupt
+trap 'rm -f "${tmp_file}"' EXIT INT TERM
 
 while IFS='|' read -r src dest; do
     # Skip comments and blank lines

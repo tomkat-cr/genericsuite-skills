@@ -1,5 +1,5 @@
 """
-Chalice Food moments operations
+Food moments operations
 """
 from typing import Any
 
@@ -35,7 +35,9 @@ async def food_moment_in_user(
     current_user: str = Depends(get_current_user),
 ) -> Any:
     """
-    Fetch the count of food_moment_id in all user's "food_times" array
+    Fetch the count of food_moment_id in user's "users_food_times" array
+    to prevent a user's food moment to be deleted if at least one
+    users_food_times array row references it.
     """
     gs_request, other_params = get_default_fa_request(
         current_user=current_user)

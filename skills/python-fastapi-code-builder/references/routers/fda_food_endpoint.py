@@ -2,7 +2,6 @@
 FastAPI FDA food API endpoint
 """
 from typing import Any
-import json
 
 from fastapi import Depends, Request as FaRequest
 from fastapi.security import HTTPBasic
@@ -49,7 +48,7 @@ async def fda_food_endpoint(
         # passed it to the model layer via
         # get_default_fa_request(..., json_body=params).
         params = await request.json()
-    except json.JSONDecodeError:
+    except Exception:
         params = {}
 
     food_name = params.get('food_name', '')

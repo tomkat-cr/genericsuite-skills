@@ -20,5 +20,6 @@ mkdocs_root/code/exampleapp/apps/api-fastapi/lib/routers/fda_food_endpoint.py|sk
 mkdocs_root/code/exampleapp/apps/api-fastapi/lib/routers/food_moments.py|skills/python-fastapi-code-builder/references/routers/food_moments.py
 mkdocs_root/code/exampleapp/apps/api-fastapi/lib/models/external_apis/fda_food_endpoint.py|skills/python-fastapi-code-builder/references/models/fda_food_endpoint_model.py
 mkdocs_root/code/exampleapp/apps/api-fastapi/lib/models/admin_food/food_moments.py|skills/python-fastapi-code-builder/references/models/food_moments_model.py
+mkdocs_root/code/exampleapp/apps/api-fastapi/lib/models/ai_chatbot/ai_gpt_fn_app.py|skills/python-fastapi-code-builder/references/models/ai_gpt_fn_app_model.py
 mkdocs_root/code/exampleapp/apps/api-fastapi/lib/main.py|skills/python-fastapi-code-builder/references/main.py
 mkdocs_root/code/configuration-guide/crud_editor_config_classes.py|skills/python-fastapi-code-builder/references/crud_editor_config_classes.py

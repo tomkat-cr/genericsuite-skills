@@ -15,6 +15,8 @@ bundled under `references/`:
   layer for the external-API case
 - `references/models/food_moments_model.py` — model layer using
   GenericDbHelper for DB access
+- `references/models/ai_gpt_fn_app_model.py` — model layer with
+  `fetch_all_from_db` DB-middleware reads (see `search_user_ingredient_func`)
 - `references/main.py` — how routers are registered with `include_router`
 - `references/crud_editor_config_classes.py` — Pydantic models for config_dbdef JSON files (use to validate entity config inputs)
 
@@ -66,15 +68,12 @@ Template (adapt from `references/models/fda_food_endpoint_model.py`):
 from typing import Optional
 
 from genericsuite.util.framework_abs_layer import Response, BlueprintOne
-from genericsuite.util.app_logger import log_debug
 from genericsuite.util.jwt import AuthorizedRequest
 from genericsuite.util.utilities import (
     get_request_body,
     return_resultset_jsonified_or_exception,
 )
 from genericsuite.config.config_from_db import app_context_and_set_env
-
-DEBUG = False
 
 
 def <feature>(
@@ -102,9 +101,11 @@ def <feature>(
     return return_resultset_jsonified_or_exception(result)
 ```
 
-For DB access inside the business logic, use GenericDbHelper with the
-entity's backend JSON config name (see
-`references/models/food_moments_model.py` for the working idiom):
+For DB access inside the business logic, you can use the following approaches:
+
+1. use the `fetch_all_from_db` function from the `genericsuite.util.generic_db_middleware` module
+to fetch all the records from the database with a like query (app context is needed):
+(see `search_user_ingredient_func` in `references/models/ai_gpt_fn_app_model.py` for the working idiom)
 
 ```python
 from genericsuite.util.generic_db_middleware import (
@@ -118,6 +119,64 @@ result = fetch_all_from_db(
 )
 ```
 
+2. use GenericDbHelper with the entity's backend JSON config name to fetch records 
+from the database when data is in a table's array (request and blueprint are needed).
+For example, to fetch all the records from the 'users_food_times' array that
+references a food moment id:
+(see `references/models/food_moments_model.py` for the working idiom):
+
+```python
+from genericsuite.util.generic_db_helpers import GenericDbHelper
+dbo = GenericDbHelper(
+    json_file="<entity_backend_config_name>",
+    request=request,
+    blueprint=blueprint
+)
+result = dbo.get_array_item_in_row(
+    '<food_moment_id>',
+    {"user_id": '<user_id>'})
+```
+
+3. use GenericDbHelperSuper with the entity's backend JSON config name to fetch records 
+from the database (no app context, request nor blueprint are needed).
+For example, to fetch records from the 'users_api_keys' and 'users' tables
+to verify the access token and user id:
+
+```python
+from genericsuite.util.generic_db_helpers_super import \
+    GenericDbHelperSuper
+from genericsuite.util.utilities import error_resultset
+
+access_token = '<access_token_here_string>'
+user_id = '<user_id_here_string>'
+
+# Example accessing the 'users_api_keys' table item by a attribute name
+# 'access_token' (non-primary key)
+dbo = GenericDbHelperSuper(json_file="users_api_keys")
+api_key_data = dbo.fetch_row_by_entryname_raw(
+    'access_token', access_token)
+if api_key_data['error']:
+    return error_resultset(api_key_data['error_message'])
+resultset = api_key_data['resultset']
+if not resultset:
+    return error_resultset('<access_token_not_found_error_message_here>')
+if user_id and resultset['user_id'] != user_id:
+    return error_resultset('<access_token_not_found_error_message_here>')
+if resultset['active'] != '1':
+    return error_resultset('<access_token_not_active_error_message_here>')
+
+# Example accessing the 'users' table item by the primary key
+user_id = resultset['user_id']
+dbo = GenericDbHelperSuper(json_file="users")
+user_data = dbo.fetch_row_raw(user_id)
+if user_data['error']:
+    return error_resultset(user_data['error_message'])
+if not user_data['resultset']:
+    return error_resultset('<user_not_found_error_message_here>')
+if user_data['resultset'].get('status') != '1':
+    return error_resultset('<user_not_active_error_message_here>')
+```
+
 ## Step 3 — Generate the router layer
 
 File: `lib/routers/<feature>.py`.
@@ -129,10 +188,8 @@ Template (adapt from `references/routers/fda_food_endpoint.py`):
 <Feature> FastAPI endpoint
 """
 from typing import Any
-import json
 
 from fastapi import Depends, Request as FaRequest
-from fastapi.security import HTTPBasic
 
 from genericsuite.fastapilib.framework_abstraction import BlueprintOne
 from genericsuite.fastapilib.util.dependencies import (
@@ -143,7 +200,6 @@ from genericsuite.fastapilib.util.dependencies import (
 from lib.models.<domain>.<feature> import <feature> as <feature>_model
 
 router = BlueprintOne()
-security = HTTPBasic()
 
 
 @router.post('', tags='<feature_tag>')
@@ -156,7 +212,7 @@ async def <feature>_endpoint(
     """
     try:
         params = await request.json()
-    except json.JSONDecodeError:
+    except Exception:
         params = {}
     gs_request, other_params = get_default_fa_request(
         current_user=current_user,

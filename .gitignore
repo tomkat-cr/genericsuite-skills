@@ -216,5 +216,6 @@ __marimo__/
 .cursor
 .gemini
 
-skills/skill-creator
+# skills/skill-creator
+.superpowers/
 jsx-code-builder-workspace
