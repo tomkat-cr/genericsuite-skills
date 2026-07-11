@@ -23,3 +23,23 @@ mkdocs_root/code/exampleapp/apps/api-fastapi/lib/models/admin_food/food_moments.
 mkdocs_root/code/exampleapp/apps/api-fastapi/lib/models/ai_chatbot/ai_gpt_fn_app.py|skills/python-fastapi-code-builder/references/models/ai_gpt_fn_app_model.py
 mkdocs_root/code/exampleapp/apps/api-fastapi/lib/main.py|skills/python-fastapi-code-builder/references/main.py
 mkdocs_root/code/configuration-guide/crud_editor_config_classes.py|skills/python-fastapi-code-builder/references/crud_editor_config_classes.py
+
+# python-ai-code-builder
+mkdocs_root/code/fastapitemplate/server/lib/routers/ai_assistant.py|skills/python-ai-code-builder/references/routers/ai_assistant.py
+mkdocs_root/code/exampleapp/apps/api-fastapi/lib/models/ai_chatbot/ai_gpt_fn_index.py|skills/python-ai-code-builder/references/models/ai_gpt_fn_index.py
+mkdocs_root/code/fastapitemplate/server/lib/main.py|skills/python-ai-code-builder/references/main.py
+
+# python-ai-tools-code-builder
+mkdocs_root/code/exampleapp/apps/api-fastapi/lib/models/ai_chatbot/ai_gpt_fn_fda.py|skills/python-ai-tools-code-builder/references/ai_gpt_fn_fda.py
+mkdocs_root/code/exampleapp/apps/api-fastapi/lib/models/ai_chatbot/ai_gpt_fn_app.py|skills/python-ai-tools-code-builder/references/ai_gpt_fn_app.py
+mkdocs_root/code/exampleapp/apps/api-fastapi/lib/models/ai_chatbot/ai_gpt_fn_index.py|skills/python-ai-tools-code-builder/references/ai_gpt_fn_index.py
+
+# mcp-builder
+mkdocs_root/code/exampleapp/apps/mcp-server/mcp_server.py|skills/mcp-builder/references/mcp_server_full_example.py
+mkdocs_root/code/fastapitemplate/server/lib/mcp_server.py|skills/mcp-builder/references/mcp_server_minimal.py
+mkdocs_root/code/fastapitemplate/mcp-server/package.json|skills/mcp-builder/references/mcp-server-package.json
+mkdocs_root/code/fastapitemplate/mcp-server/claude_desktop_stdio_config.json|skills/mcp-builder/references/claude_desktop_stdio_config.json
+mkdocs_root/code/fastapitemplate/mcp-server/claude_desktop_http_config.json|skills/mcp-builder/references/claude_desktop_http_config.json
+mkdocs_root/code/fastapitemplate/mcp-server/vscode_mcp_stdio_config.json|skills/mcp-builder/references/vscode_mcp_stdio_config.json
+mkdocs_root/code/fastapitemplate/mcp-server/vscode_mcp_http_config.json|skills/mcp-builder/references/vscode_mcp_http_config.json
+mkdocs_root/code/fastapitemplate/mcp-server/README.md|skills/mcp-builder/references/mcp-server-README.md

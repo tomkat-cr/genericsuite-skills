@@ -1,0 +1,39 @@
+{
+  "name": "mcp_server",
+  "version": "1.0.0",
+  "description": "fastapitemplate (MCP Server)",
+  "author": "Carlos Ramirez",
+  "license": "Private",
+  "homepage": "https://github.com/github-username/fastapitemplate#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/github-username/fastapitemplate.git"
+  },
+  "bugs": {
+    "url": "https://github.com/github-username/fastapitemplate/issues"
+  },
+  "scripts": {
+    "api:install": "make install",
+    "api:update": "make update",
+    "dev": "make run_${STAGE:-qa}",
+    "dev:start": "npm run start:qa:debug",
+    "build": "make install_dev",
+    "build:from_root": "npm run build",
+    "test": "./node_modules/genericsuite-be-scripts/scripts/aws/run_aws.sh test",
+    "start:local": "bash ./run_mcp_server.sh",
+    "start:local:gs_be_scripts": "./node_modules/genericsuite-be-scripts/scripts/aws/run_aws.sh",
+    "start:qa": "bash ../node_modules/genericsuite-be-scripts/scripts/aws/set_chalice_cnf.sh qa && bash ./run_mcp_server.sh",
+    "start:qa:gs_be_scripts": "bash ../node_modules/genericsuite-be-scripts/scripts/aws/set_chalice_cnf.sh qa && bash ../node_modules/genericsuite-be-scripts/scripts/aws/run_aws.sh run_local qa",
+    "start:qa:debug": "bash ../node_modules/genericsuite-be-scripts/scripts/aws/set_chalice_cnf.sh qa && MCP_DEBUG_MODE=1 bash ./run_mcp_server.sh",
+    "deploy": "echo 'No deployment needed for MCP server'",
+    "pipfile": "echo 'No pipfile needed for MCP server'",
+    "shell": "echo 'No shell needed for MCP server'",
+    "clean": "rm -rf __pycache__ bin pyvenv.cfg .venv node_modules",
+    "coverage": "echo 'No coverage needed for MCP server'",
+    "lint": "echo 'No linting needed for MCP server'",
+    "check-types": "echo 'No checking types needed for MCP server'"
+  },
+  "dependencies": {
+    "genericsuite-be-scripts": "^1.2.0"
+  }
+}
