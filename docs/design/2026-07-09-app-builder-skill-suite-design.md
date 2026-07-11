@@ -197,9 +197,22 @@ template needs to be created.
 The "build me an app" entry point.
 
 - **Flow:**
+  0. Mode detection (greenfield vs. brownfield): probe the target
+     directory for an existing GenericSuite project — `config_dbdef/`
+     present, `genericsuite`/`genericsuite-ai` in the Python deps, a
+     `componentMap` in the frontend's App.jsx. If found, SKIP step 2,
+     inventory the existing entities/menus/endpoints/AI wiring, and frame
+     the interview additively ("what do you want to add?") instead of
+     "what app do you want to build?". The specialized skills already
+     support this mode: menu-builder/endpoints-builder merge
+     idempotently, python-ai-code-builder preserves a populated index,
+     python-ai-tools-code-builder skips existing registrations, and
+     mcp-builder has EXTEND mode. If the directory exists but is NOT a
+     GenericSuite project, stop and point the user at the `gs-adopt`
+     gap (see Out of Scope) — do not scaffold on top of foreign code.
   1. Interview: app purpose, entities and fields, relationships, AI
      features wanted (chatbot? AI tools? which?), deployment intent.
-  2. `app-starter` → new project scaffold.
+  2. `app-starter` → new project scaffold (greenfield only).
   3. `config-builder` per entity (master + children).
   4. `menu-builder` + `endpoints-builder` to register the new entities.
   5. `jsx-code-builder` per master config.
@@ -298,6 +311,16 @@ because it depends on all the specialized skills existing.
   frontend: `npm run build` if feasible, else lint).
 
 ## Out of Scope (for now)
+
+- **`gs-adopt` — retrofitting GenericSuite into an existing
+  non-GenericSuite app** (plain FastAPI/Flask/React codebase): installing
+  the deps, migrating to `create_app`, scaffolding `config_dbdef/`, wiring
+  App.jsx's `componentMap`, adopting the `.env` conventions. The shipped
+  skills assume the GenericSuite skeleton exists; brownfield support
+  covers existing *GenericSuite* apps only (idempotent merges, EXTEND
+  modes, index preservation). `gs-adopt` must reason about arbitrary
+  legacy code rather than known templates — substantially harder than the
+  template-grounded skills — so it is named future scope, not committed.
 
 - ExampleApp-based starter with framework selection (GS-306 follow-up).
 - Flask/Chalice router wiring templates (business logic is already

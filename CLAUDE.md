@@ -27,7 +27,10 @@ Each skill directory contains:
 | `skills/config-builder/` | Generates GenericSuite frontend/backend JSON config files for CRUD editors |
 | `skills/endpoints-builder/` | Adds/updates API endpoint registrations in backend/endpoints.json (idempotent JSON merge) |
 | `skills/jsx-code-builder/` | Generates React JSX component files from GenericSuite frontend JSON configs |
+| `skills/mcp-builder/` | Builds/extends the MCP server exposing the app's AI tools (*_func wrappers, auth, prompts, client configs) |
 | `skills/menu-builder/` | Adds/updates menu entries in backend/app_main_menu.json (idempotent JSON merge) |
+| `skills/python-ai-code-builder/` | Wires the GenericSuite AI assistant into a backend (router, skeleton GPT-functions index, env checklist) |
+| `skills/python-ai-tools-code-builder/` | Generates LangChain @tool/_func pairs for the AI assistant and registers them in ai_gpt_fn_index.py |
 | `skills/python-fastapi-code-builder/` | Generates custom GenericSuite FastAPI routers + abstraction-layer model modules |
 | `skills/release-notes/` | Drafts bilingual (EN/ES) changelog entries |
 | `skills/skill-creator/` | Meta-skill for creating, testing, evaluating, and improving other skills |

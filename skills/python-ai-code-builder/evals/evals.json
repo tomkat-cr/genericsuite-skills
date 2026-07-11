@@ -1,0 +1,35 @@
+{
+    "skill_name": "python-ai-code-builder",
+    "evals": [
+        {
+            "id": 1,
+            "prompt": "Wire the GenericSuite AI assistant into a fresh backend: all three features (chatbot, image-to-text, voice-to-text). Project root: playground/python-ai-code-builder-test/eval-1/",
+            "expected_output": "lib/routers/ai_assistant.py, skeleton lib/models/ai_chatbot/ai_gpt_fn_index.py (+__init__.py), main.py wiring snippet and env checklist",
+            "files": [],
+            "expectations": [
+                "Creates lib/routers/ai_assistant.py and lib/models/ai_chatbot/ai_gpt_fn_index.py under the output root",
+                "All generated .py files pass python3 -m py_compile (runtime validity)",
+                "The router imports assign_app_specific_gpt_functions from lib.models.ai_chatbot.ai_gpt_fn_index and passes it as additional_callable",
+                "The router has /chatbot, /image_to_text and /voice_to_text POST endpoints using BlueprintOne, get_default_fa_request and set_current_request",
+                "The index defines assign_app_specific_gpt_functions, get_additional_functions_dict (both is_lc branches returning empty dicts), additional_gpt_func_appcontexts returning [], additional_run_one_function and get_additional_function_specs",
+                "The index does NOT import fastapi",
+                "Outputs a main.py snippet with app.include_router and prefix f'/{settings.API_VERSION}/ai'",
+                "Outputs an env checklist naming OPENAI_API_KEY with placeholder values only (no real-looking secrets)"
+            ]
+        },
+        {
+            "id": 2,
+            "prompt": "Wire the GenericSuite AI assistant (chatbot only) into a backend that ALREADY has a populated GPT-functions index at playground/gs-billing-app/ai-fixtures/lib/models/ai_chatbot/ai_gpt_fn_index.py. Copy that fixture tree to playground/python-ai-code-builder-test/eval-2/lib/models/ai_chatbot/ first, then run against project root playground/python-ai-code-builder-test/eval-2/",
+            "expected_output": "Only the router is generated; the existing index is detected and left byte-for-byte untouched",
+            "files": [
+                "playground/gs-billing-app/ai-fixtures/lib/models/ai_chatbot/ai_gpt_fn_index.py"
+            ],
+            "expectations": [
+                "Creates lib/routers/ai_assistant.py with the /chatbot endpoint (and no /image_to_text or /voice_to_text endpoints, since only chatbot was requested)",
+                "Generated router passes python3 -m py_compile (runtime validity)",
+                "The existing ai_gpt_fn_index.py is byte-identical to the fixture after the run (not regenerated, not reformatted)",
+                "Reports that the index already existed and was preserved"
+            ]
+        }
+    ]
+}
