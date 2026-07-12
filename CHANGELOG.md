@@ -26,7 +26,7 @@ This project adheres to [Semantic Versioning](http://semver.org/) and [Keep a Ch
   `jsx-code-builder` (updated), `menu-builder`, `endpoints-builder`,
   `python-fastapi-code-builder`, `python-ai-code-builder`,
   `python-ai-tools-code-builder`, `jsx-ai-code-builder`, `mcp-builder`.
-- Per-skill `evals/evals.json` with runtime-validity assertions, exercised in
+- `evals/evals.json` suites (all suite skills except config-builder) with runtime-validity assertions, exercised in
   `playground/` [GS-254].
 - Reference-sync mechanism: `skills/update-gs-docs` map + script,
   `make sync-references` [GS-254].

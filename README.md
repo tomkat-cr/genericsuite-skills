@@ -56,7 +56,7 @@ Or run the pieces yourself: `/app-starter` to scaffold, then `/config-builder`, 
 
 ## Development
 
-- Each skill ships `evals/evals.json`; generated-output tests run in `playground/` (gitignored except the `gs-billing-app` fixture).
+- Most skills ship `evals/evals.json`; generated-output tests run in `playground/` (gitignored except the `gs-billing-app` fixture).
 - Validate a skill: `(cd skills/skill-creator && python3 -m scripts.quick_validate ../../skills/<name>)`
 - Package a skill: `(cd skills/skill-creator && python3 -m scripts.package_skill ../../skills/<name> ../../dist)`
 - Reference exemplars under `skills/*/references/` are synced from a basecamp checkout — never hand-edited: `BASECAMP_DIR=../genericsuite-basecamp make sync-references`
