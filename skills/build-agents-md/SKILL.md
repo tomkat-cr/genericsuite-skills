@@ -1,7 +1,7 @@
 ---
 name: build-agents-md
 description: Generate or update an AGENTS.md file for any project repository by analyzing the codebase. Use when the user asks to "build AGENTS.md", "create AGENTS.md", "generate AGENTS.md", or "scaffold agent instructions" for a project.
-argument-hint: [path/to/project] (optional; defaults to current working directory)
+argument-hint: "[path/to/project] (optional; defaults to current working directory)"
 ---
 
 Generate a well-filled `AGENTS.md` for the target project by exploring its codebase and filling in the template.
