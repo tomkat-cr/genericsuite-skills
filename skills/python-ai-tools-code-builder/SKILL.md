@@ -62,7 +62,6 @@ from langchain.tools import tool
 from pydantic import BaseModel, Field
 
 from genericsuite.util.app_context import CommonAppContext
-from genericsuite.util.app_logger import log_debug
 
 from genericsuite_ai.lib.ai_langchain_tools import (
     interpret_tool_params,

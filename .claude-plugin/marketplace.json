@@ -6,12 +6,12 @@
   },
   "metadata": {
     "description": "GenericSuite skills",
-    "version": "1.0.0"
+    "version": "1.1.0"
   },
   "plugins": [
     {
-      "name": "code-generation-skills",
-      "description": "Collection of GenericSuite JSON config files and code generation capabilities",
+      "name": "gs-app-builder-suite",
+      "description": "GenericSuite app-builder suite — bootstrap a full-stack GenericSuite app and generate its JSON configs, CRUD code, AI assistant wiring and MCP server",
       "source": "./",
       "strict": false,
       "skills": [
