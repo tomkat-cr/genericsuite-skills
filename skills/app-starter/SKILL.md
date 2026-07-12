@@ -70,17 +70,17 @@ bash <basecamp-dir>/scripts/new-project-from-template.sh "<target-dir>" "<app-na
 
 ### Path B — offline, from a local basecamp checkout
 
-Replicates exactly what the script does, without the network clone:
+Replicates what the script does, without the network clone — extracting only git-tracked template content:
 
 ```bash
-cp -r "<basecamp-dir>/mkdocs_root/code/fastapitemplate" "<target-dir>"
-mkdir -p "<target-dir>/scripts"
-cp "<basecamp-dir>/scripts/rename-app.sh" "<target-dir>/scripts/rename-app.sh"
+[ -e "<target-dir>" ] && { echo "target exists — refusing to scaffold"; exit 1; }
+mkdir -p "<target-dir>"
+# extract TRACKED content only — a local checkout's working tree may hold
+# untracked artifacts (stale .env files with secrets, node_modules) that a
+# fresh clone never has; git archive makes inheriting them impossible
+git -C "<basecamp-dir>" archive HEAD:mkdocs_root/code/fastapitemplate | tar -x -C "<target-dir>"
+git -C "<basecamp-dir>" archive HEAD scripts/rename-app.sh | tar -x -C "<target-dir>"
 cd "<target-dir>"
-rm -rf .git
-# a local checkout may hold untracked artifacts a fresh clone never has:
-rm -f .env
-rm -rf node_modules ui/node_modules server/.venv server/__pycache__
 git init --quiet
 git add .
 git commit --quiet -m "Initial commit from fastapitemplate"
@@ -94,7 +94,7 @@ git commit --quiet -m "Rename: fastapitemplate → <app-name>"
 ```bash
 cd "<target-dir>"
 ls ui server mcp-server config_dbdef deploy Makefile scripts/rename-app.sh
-[ ! -f .env ] && echo "no stale .env"
+[ -z "$(find . -name '.env*' ! -name '*.example' -not -path './.git/*')" ] && echo "no stray env files"
 git log --oneline   # expect exactly 2 commits (initial + rename)
 grep -c "APP_NAME=<app-name>" .env.example   # expect 1
 ! grep -qi fastapitemplate package.json server/pyproject.toml .env.example && echo "rename OK"

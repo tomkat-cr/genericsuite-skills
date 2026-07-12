@@ -12,7 +12,7 @@
                 "package.json 'name' is 'trackerapp' and contains no occurrence of 'fastapitemplate' (runtime validity: npm workspace boots under the new name)",
                 ".env.example contains APP_NAME=trackerapp and APP_DOMAIN_NAME=trackerapp.io and no occurrence of 'fastapitemplate'",
                 "server/pyproject.toml contains no occurrence of 'fastapitemplate'",
-                "No .env file was created (init-app-environment was not run, as instructed)",
+                "No non-example .env* file exists anywhere in the scaffold (init-app-environment was not run, and no untracked env files leaked from the source checkout)",
                 "The response reports the scaffold verification results and stops without installing dependencies or starting servers"
             ]
         },
