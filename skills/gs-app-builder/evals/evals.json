@@ -11,7 +11,7 @@
         "The scaffold at playground/gs-app-builder-test/eval-1/invoicehub is a fresh git repo with the fastapitemplate layout fully renamed to invoicehub/invoicehub.io (no occurrence of 'fastapitemplate' in package.json, server/pyproject.toml or .env.example)",
         "config_dbdef/frontend and config_dbdef/backend each contain customers.json, invoices.json and invoice_lines.json, and every one of them parses as valid JSON (runtime validity)",
         "config_dbdef/backend/app_main_menu.json contains menu entries whose element values are Customers_EditorData and Invoices_EditorData, and config_dbdef/backend/endpoints.json registers url_prefix 'customers' and 'invoices' but has NO endpoint entry for invoice_lines (children live inside the parent document)",
-        "ui/src/components/Customers/Customers.jsx and ui/src/components/Invoices/Invoices.jsx exist and App.jsx's componentMap references Customers_EditorData and Invoices_EditorData (runtime validity: the menu elements resolve to real components)",
+        "Customers.jsx and Invoices.jsx exist under ui/src/components/<MenuGroup>/ (jsx-code-builder's menu-group folder convention) and App.jsx's componentMap references Customers_EditorData and Invoices_EditorData (runtime validity: the menu elements resolve to real components)",
         "No secrets were written: .env (if created by init-app-environment) still has APP_SECRET_KEY=xxxx, and make install-all / dev servers were never run",
         "A checkpoint summary (files created/changed) was printed after each phase"
       ]
