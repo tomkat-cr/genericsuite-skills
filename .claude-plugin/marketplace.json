@@ -15,6 +15,7 @@
       "source": "./",
       "strict": false,
       "skills": [
+        "./skills/app-starter",
         "./skills/config-builder",
         "./skills/endpoints-builder",
         "./skills/jsx-ai-code-builder",

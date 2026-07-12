@@ -23,6 +23,7 @@ Each skill directory contains:
 
 | Skill | Purpose |
 |---|---|
+| `skills/app-starter/` | Bootstraps a new GenericSuite app from the basecamp fastapitemplate (scaffold + rename, env init, .env checklist, install, first run) |
 | `skills/build-agents-md/` | Generates AGENTS.md documentation for any project |
 | `skills/config-builder/` | Generates GenericSuite frontend/backend JSON config files for CRUD editors |
 | `skills/endpoints-builder/` | Adds/updates API endpoint registrations in backend/endpoints.json (idempotent JSON merge) |
