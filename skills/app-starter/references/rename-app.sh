@@ -118,6 +118,23 @@ done < <(
         -o -type f \( "${NAME_ARGS[@]}" \) -print0
 )
 
+# ── Rename files whose names contain the old name ───────────────────────────
+# (contents were rewritten above; filenames like
+#  server/fastapitemplate-backend_openapi.json need renaming too)
+while IFS= read -r -d '' file; do
+    base="$(basename "$file")"
+    newbase="$(echo "$base" | perl -pe "s/\Q${OLD_NAME}\E/${NEW_NAME}/gi")"
+    if [ "$base" != "$newbase" ]; then
+        mv "$file" "$(dirname "$file")/${newbase}"
+        echo "  renamed: ${file#$BASE_DIR/} -> ${newbase}"
+        FILE_COUNT=$((FILE_COUNT + 1))
+    fi
+done < <(
+    find "$BASE_DIR" \
+        \( "${PRUNE_ARGS[@]}" \) -prune \
+        -o -type f -iname "*${OLD_NAME}*" -print0
+)
+
 echo ""
 echo "Done. $FILE_COUNT file(s) updated."
 echo ""
