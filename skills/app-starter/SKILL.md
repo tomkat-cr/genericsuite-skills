@@ -78,6 +78,9 @@ mkdir -p "<target-dir>/scripts"
 cp "<basecamp-dir>/scripts/rename-app.sh" "<target-dir>/scripts/rename-app.sh"
 cd "<target-dir>"
 rm -rf .git
+# a local checkout may hold untracked artifacts a fresh clone never has:
+rm -f .env
+rm -rf node_modules ui/node_modules server/.venv server/__pycache__
 git init --quiet
 git add .
 git commit --quiet -m "Initial commit from fastapitemplate"
@@ -91,6 +94,7 @@ git commit --quiet -m "Rename: fastapitemplate → <app-name>"
 ```bash
 cd "<target-dir>"
 ls ui server mcp-server config_dbdef deploy Makefile scripts/rename-app.sh
+[ ! -f .env ] && echo "no stale .env"
 git log --oneline   # expect exactly 2 commits (initial + rename)
 grep -c "APP_NAME=<app-name>" .env.example   # expect 1
 ! grep -qi fastapitemplate package.json server/pyproject.toml .env.example && echo "rename OK"
