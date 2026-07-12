@@ -18,6 +18,7 @@
         "./skills/app-starter",
         "./skills/config-builder",
         "./skills/endpoints-builder",
+        "./skills/gs-app-builder",
         "./skills/jsx-ai-code-builder",
         "./skills/jsx-code-builder",
         "./skills/mcp-builder",
