@@ -48,3 +48,10 @@ mkdocs_root/code/fastapitemplate/mcp-server/README.md|skills/mcp-builder/referen
 mkdocs_root/code/exampleapp/apps/ui/src/components/UsersMenu/UserIngredients.jsx|skills/jsx-ai-code-builder/references/UserIngredients.example.jsx
 mkdocs_root/code/exampleapp/apps/ui/src/components/App/App.jsx|skills/jsx-ai-code-builder/references/App.example.jsx
 mkdocs_root/code/exampleapp/apps/config_dbdef/frontend/user_ingredients.json|skills/jsx-ai-code-builder/references/user_ingredients.example.json
+
+# app-starter
+scripts/new-project-from-template.sh|skills/app-starter/references/new-project-from-template.sh
+scripts/rename-app.sh|skills/app-starter/references/rename-app.sh
+mkdocs_root/code/fastapitemplate/scripts/init_app_environment.sh|skills/app-starter/references/init_app_environment.sh
+mkdocs_root/code/fastapitemplate/README.md|skills/app-starter/references/fastapitemplate-README.md
+mkdocs_root/code/fastapitemplate/.env.example|skills/app-starter/references/fastapitemplate.env.example
