@@ -37,15 +37,6 @@
         "./skills/build-agents-md",
         "./skills/skill-creator"
       ]
-    },
-    {
-      "name": "release-prep-skills",
-      "description": "Collection of Genericsuite release preparation capabilities",
-      "source": "./",
-      "strict": false,
-      "skills": [
-        "./skills/release-notes"
-      ]
     }
   ]
 }

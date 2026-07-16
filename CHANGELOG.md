@@ -17,9 +17,10 @@ This project adheres to [Semantic Versioning](http://semver.org/) and [Keep a Ch
 ### Security
 
 
-## 1.1.0 (2026-07-12)
+## [1.0.0] - 2026-07-15
 
 ### Added
+- Project ideation and initial development (2026-04-12) [GS-254].
 - App-builder skill suite (`gs-app-builder-suite` plugin group) [GS-254]:
   `gs-app-builder` orchestrator (greenfield/brownfield mode detection, app-brief
   interview, checkpointed flow), `app-starter`, `config-builder` (updated),
@@ -37,8 +38,5 @@ This project adheres to [Semantic Versioning](http://semver.org/) and [Keep a Ch
 - README rewritten around the app-builder suite, installation and
   publishing [GS-254].
 
-
-## [Unreleased] - 2026-04-12
-
-### Added
-- Project ideation and initial development [GS-254].
+### Removed
+- `release-notes` skill removed from marketplace, and delete SKILL.md file (moved to GS Superproject directory) [GS-191].
