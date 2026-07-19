@@ -1,0 +1,36 @@
+{
+    "skill_name": "menu-builder",
+    "evals": [
+        {
+            "id": 1,
+            "prompt": "Add menu entries for the Customers editor (component Customers, regular users) into a new 'Contacts' menu group, and for the Invoices editor (component Invoices, regular users) into the existing 'Billing' group. The menu file is at playground/gs-billing-app/config_dbdef/backend/app_main_menu.json. Write the updated file to playground/menu-builder-test/eval-1/app_main_menu.json (copy the original there first, then edit the copy).",
+            "expected_output": "Updated app_main_menu.json with a new Contacts group containing Customers_EditorData; Billing group unchanged because Invoices_EditorData already exists",
+            "files": [
+                "playground/gs-billing-app/config_dbdef/backend/app_main_menu.json"
+            ],
+            "expectations": [
+                "Output file parses as valid JSON (runtime validity)",
+                "A new nav_dropdown group titled 'Contacts' exists with location top_menu and sec_group users",
+                "The Contacts group's sub_menu_options contains exactly one editor entry with element 'Customers_EditorData'",
+                "The Billing group still contains exactly ONE entry with element 'Invoices_EditorData' (duplicate was skipped, not added)",
+                "Reports that Invoices_EditorData was skipped as already present",
+                "The Home nav_link entry is preserved unchanged (same keys and values)"
+            ]
+        },
+        {
+            "id": 2,
+            "prompt": "Add a menu entry for the InvoiceLines component (its frontend config playground/gs-billing-app/config_dbdef/frontend/invoice_lines.json has type child_listing) and for the Accounts editor (component Accounts, admin-only) in a new 'Accounting' group. Menu file: playground/gs-billing-app/config_dbdef/backend/app_main_menu.json. Write the result to playground/menu-builder-test/eval-2/app_main_menu.json (copy the original there first, then edit the copy).",
+            "expected_output": "Accounts added under a new Accounting group with sec_group admin; InvoiceLines refused because child listings never get menu entries",
+            "files": [
+                "playground/gs-billing-app/config_dbdef/backend/app_main_menu.json",
+                "playground/gs-billing-app/config_dbdef/frontend/invoice_lines.json"
+            ],
+            "expectations": [
+                "Output file parses as valid JSON (runtime validity)",
+                "No entry with element containing 'InvoiceLines' exists anywhere in the output",
+                "Explains that child_listing components are accessed through the parent form and get no menu entry",
+                "A new group titled 'Accounting' contains an editor entry with element 'Accounts_EditorData' and sec_group 'admin'"
+            ]
+        }
+    ]
+}

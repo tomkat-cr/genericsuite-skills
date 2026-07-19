@@ -1,0 +1,107 @@
+"""
+Food moments specific operations
+"""
+from typing import Optional
+
+from genericsuite.util.framework_abs_layer import Response, BlueprintOne
+
+from genericsuite.util.app_logger import log_debug
+from genericsuite.util.generic_db_helpers import GenericDbHelper
+from genericsuite.util.jwt import AuthorizedRequest
+from genericsuite.util.utilities import (
+    return_resultset_jsonified_or_exception,
+    get_query_params,
+    method_not_allowed,
+)
+from genericsuite.config.config_from_db import app_context_and_set_env
+
+
+DEBUG = False
+
+
+def food_moment_in_user(
+    request: AuthorizedRequest,
+    blueprint: BlueprintOne,
+    other_params: Optional[dict] = None
+) -> Response:
+    """
+    Fetch the count of food_moment_id in user's "users_food_times" array
+    to prevent a user's food moment to be deleted if at least one
+    users_food_times array row references it.
+    """
+    if not other_params:
+        other_params = {}
+    # Set environment variables from the database configurations.
+    app_context = app_context_and_set_env(
+        request=request,
+        blueprint=blueprint)
+    if app_context.has_error():
+        return return_resultset_jsonified_or_exception(
+            app_context.get_error_resultset()
+        )
+    # Fetch the count of food_moment_id in user's "users_food_times" array
+    dbo = GenericDbHelper(json_file="users_food_times", request=request,
+                          blueprint=blueprint)
+    query_params = get_query_params(request)
+    food_moment_id = query_params.get('id')
+    user_id = app_context.get_user_id()
+    if food_moment_id is not None:
+        _ = DEBUG and log_debug(
+            f'GFMIU-1) food_moment by id: {food_moment_id}')
+        result = dbo.get_array_item_in_row(
+            food_moment_id,
+            {"user_id": user_id})
+        _ = DEBUG and log_debug(
+            f'GFMIU-2) food_moment by id: {food_moment_id}' +
+            f' | result: {result}')
+        return return_resultset_jsonified_or_exception(result)
+    # If no food moment ID, deny the request.
+    return method_not_allowed()
+
+
+"""
+The following is an example of a "manual" implementation of the CRUD editor
+for a specific endpoint, and it's not used unless you need to override the
+default behavior.
+
+Normally the generic CRUD editor is implemented automatically by configuring the endpoint in the
+`config_dbdef/backend/endpoints.json` file and the CRUD editor as a menu option in the
+`config_dbdef/backend/app_main_menu.json` file
+
+Then `genericsuite.fastapilib.util.create_app.create_app` invokes
+`genericsuite.fastapilib.util.generic_endpoint_builder.generate_blueprints_from_json`
+which builds the CRUD editor endpoint and the corresponding call to the
+`generic_crud_main` or `generic_array_crud` methods.
+"""  # noqa: E501
+
+# from genericsuite.util.generic_endpoint_helpers import GenericEndpointHelper
+#
+# def food_moments_crud(
+#     request: AuthorizedRequest,
+#     blueprint: BlueprintOne,
+#     other_params: Optional[dict] = None
+# ) -> Response:
+#     """
+#     CRUD operations for food_moments.
+#     """
+#     if not other_params:
+#         other_params = {}
+#     _ = DEBUG and log_debug('>>--> FOOD_MOMENTS_CRUD' +
+#         f' | request.method: {request.method}'
+#         f' | request: {request}'
+#         )
+#     # Set environment variables from the database configurations.
+#     app_context = app_context_and_set_env(
+#         request=request, blueprint=blueprint
+#     )
+#     if app_context.has_error():
+#         return return_resultset_jsonified_or_exception(
+#             app_context.get_error_resultset()
+#         )
+#     # CRUD operations for food_moments.
+#     ep_helper = GenericEndpointHelper(
+#         app_context=app_context,
+#         json_file="food_moments",
+#         url_prefix=__name__,
+#     )
+#     return ep_helper.generic_crud_main()

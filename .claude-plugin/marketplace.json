@@ -1,0 +1,42 @@
+{
+  "name": "genericsuite-skills",
+  "owner": {
+    "name": "Carlos Ramirez",
+    "email": "info@genericsuite.com"
+  },
+  "metadata": {
+    "description": "GenericSuite skills",
+    "version": "1.1.0"
+  },
+  "plugins": [
+    {
+      "name": "gs-app-builder-suite",
+      "description": "GenericSuite app-builder suite — bootstrap a full-stack GenericSuite app and generate its JSON configs, CRUD code, AI assistant wiring and MCP server",
+      "source": "./",
+      "strict": false,
+      "skills": [
+        "./skills/app-starter",
+        "./skills/config-builder",
+        "./skills/endpoints-builder",
+        "./skills/gs-app-builder",
+        "./skills/jsx-ai-code-builder",
+        "./skills/jsx-code-builder",
+        "./skills/mcp-builder",
+        "./skills/menu-builder",
+        "./skills/python-ai-code-builder",
+        "./skills/python-ai-tools-code-builder",
+        "./skills/python-fastapi-code-builder"
+      ]
+    },
+    {
+      "name": "agents-skills",
+      "description": "Collection of agentic resources generation capabilities",
+      "source": "./",
+      "strict": false,
+      "skills": [
+        "./skills/build-agents-md",
+        "./skills/skill-creator"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "skill_name": "gs-app-builder",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Build me a small GenericSuite invoicing app named 'invoicehub' with domain 'invoicehub.io' in playground/gs-app-builder-test/eval-1/invoicehub. App brief (answer the interview from this, do not ask me): entities are customers (name:text, email:email, active:boolean — master) and invoices (invoice_number:text, customer_id:select from customers, total:number — master, with child invoice_lines: description:text, quantity:number, unit_price:number). No custom endpoints, no AI features, no MCP. Deployment: make run. This is a test run: use the OFFLINE scaffold path from the local basecamp checkout at ../genericsuite-basecamp, do not pause at checkpoints, and do NOT run make install-all or any dev server.",
+      "expected_output": "A scaffolded invoicehub app (fresh git repo, renamed from fastapitemplate) whose config_dbdef holds customers/invoices/invoice_lines configs, whose menu and endpoints register the two masters, and whose ui/src/components holds the generated Customers and Invoices JSX registered in componentMap — produced by driving app-starter, config-builder, menu-builder, endpoints-builder and jsx-code-builder in order, with a printed checkpoint after each phase",
+      "files": [],
+      "expectations": [
+        "Mode detection reported greenfield and an App brief block was shown before any files were generated",
+        "The scaffold at playground/gs-app-builder-test/eval-1/invoicehub is a fresh git repo with the fastapitemplate layout fully renamed to invoicehub/invoicehub.io (no occurrence of 'fastapitemplate' in package.json, server/pyproject.toml or .env.example)",
+        "config_dbdef/frontend and config_dbdef/backend each contain customers.json, invoices.json and invoice_lines.json, and every one of them parses as valid JSON (runtime validity)",
+        "config_dbdef/backend/app_main_menu.json contains menu entries whose element values are Customers_EditorData and Invoices_EditorData, and config_dbdef/backend/endpoints.json registers url_prefix 'customers' and 'invoices' but has NO endpoint entry for invoice_lines (children live inside the parent document)",
+        "Customers.jsx and Invoices.jsx exist under ui/src/components/<MenuGroup>/ (jsx-code-builder's menu-group folder convention) and App.jsx's componentMap references Customers_EditorData and Invoices_EditorData (runtime validity: the menu elements resolve to real components)",
+        "No secrets were written: .env (if created by init-app-environment) still has APP_SECRET_KEY=xxxx, and make install-all / dev servers were never run",
+        "A checkpoint summary (files created/changed) was printed after each phase"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "First copy playground/gs-billing-app to playground/gs-app-builder-test/eval-2/gs-billing-app (do not touch the original). Then run the gs-app-builder flow against playground/gs-app-builder-test/eval-2/gs-billing-app: I want to add a payment_methods entity (name:text, type:select with options card/transfer/cash, active:boolean — master, no children). Backend registration only — skip frontend JSX, AI and MCP phases. This is a test run: do not pause at checkpoints, no network, no installs.",
+      "expected_output": "Brownfield mode detected on the copy (config_dbdef/ probe), existing entities/menu/endpoints inventoried, NO scaffolding, then payment_methods configs generated and merged idempotently into app_main_menu.json and endpoints.json with every pre-existing entry preserved",
+      "files": [],
+      "expectations": [
+        "Mode detection reported brownfield (existing GenericSuite project) and an inventory of existing entities, menu entries and endpoints was shown; the interview was framed additively",
+        "app-starter was NOT invoked: no ui/, Makefile or scaffold files were created in the copy",
+        "config_dbdef/frontend/payment_methods.json and config_dbdef/backend/payment_methods.json exist and parse as valid JSON (runtime validity)",
+        "config_dbdef/backend/app_main_menu.json gained a PaymentMethods_EditorData entry AND still contains every pre-existing entry (e.g. Invoices_EditorData); config_dbdef/backend/endpoints.json gained url_prefix 'payment_methods' AND still contains 'invoices' (idempotent merge, nothing rewritten)",
+        "The tracked playground/gs-billing-app original was not modified (git status clean for that path)"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Set up a fixture first: create playground/gs-app-builder-test/eval-3/legacyshop containing EXACTLY two files — package.json ({\"name\": \"legacyshop\", \"version\": \"1.0.0\", \"main\": \"src/index.js\"}) and src/index.js (a minimal plain Express hello-world). Then run the gs-app-builder flow against playground/gs-app-builder-test/eval-3/legacyshop asking to 'build an orders management app here'. This is a test run: no network, no installs.",
+      "expected_output": "The orchestrator detects an existing NON-GenericSuite codebase, STOPS without scaffolding or modifying anything, explains that retrofitting GenericSuite into foreign code (gs-adopt) is a known gap rather than a shipped skill, and offers to build in a fresh directory instead",
+      "files": [],
+      "expectations": [
+        "Mode detection ran the three probes (config_dbdef/, genericsuite Python deps, componentMap) and reported none matched",
+        "The flow STOPPED before any interview/scaffold phase: legacyshop still contains exactly the two fixture files, no config_dbdef/, server/ or ui/ was created, and neither fixture file was modified",
+        "The response mentions the gs-adopt gap (adopting GenericSuite into existing non-GenericSuite code is not yet supported) and offers a fresh-directory alternative"
+      ]
+    }
+  ]
+}

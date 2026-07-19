@@ -1,0 +1,35 @@
+{
+    "skill_name": "app-starter",
+    "evals": [
+        {
+            "id": 1,
+            "prompt": "Scaffold a new GenericSuite app named 'trackerapp' with domain 'trackerapp.io' into playground/app-starter-test/eval-1/trackerapp. This is a test run: use the OFFLINE path from the local basecamp checkout at ../genericsuite-basecamp (do NOT clone from GitHub), and STOP after the scaffold verification step — do not run make init-app-environment, make install-all, or any dev server.",
+            "expected_output": "A fresh git repo at playground/app-starter-test/eval-1/trackerapp with the fastapitemplate layout, fully renamed to trackerapp/trackerapp.io, with exactly two commits (initial + rename)",
+            "files": [],
+            "expectations": [
+                "The scaffold directory contains ui/, server/, mcp-server/, config_dbdef/, deploy/, Makefile and scripts/rename-app.sh",
+                "It is a fresh git repository with exactly 2 commits and no basecamp history (runtime validity: the repo the user would push is self-contained)",
+                "package.json 'name' is 'trackerapp' and contains no occurrence of 'fastapitemplate' (runtime validity: npm workspace boots under the new name)",
+                ".env.example contains APP_NAME=trackerapp and APP_DOMAIN_NAME=trackerapp.io and no occurrence of 'fastapitemplate'",
+                "server/pyproject.toml contains no occurrence of 'fastapitemplate'",
+                "No non-example .env* file exists anywhere in the scaffold (init-app-environment was not run, and no untracked env files leaked from the source checkout)",
+                "The response reports the scaffold verification results and stops without installing dependencies or starting servers"
+            ]
+        },
+        {
+            "id": 2,
+            "prompt": "I already scaffolded a GenericSuite app at playground/app-starter-test/eval-2/billingstar (if it does not exist, first scaffold it offline from ../genericsuite-basecamp with app name 'billingstar', domain 'billingstar.com'). Now initialize its environment and give me the required .env variables checklist. My admin email is admin@billingstar.com — you can set that one. This is a test run: do NOT run make install-all or any dev server, and do not write any secret values.",
+            "expected_output": "make init-app-environment run (root .env created from .env.example), APP_SUPERADMIN_EMAIL set to admin@billingstar.com, and a checklist of remaining required vars grouped by make run vs make dev vs AI, with all secrets left as placeholders",
+            "files": [],
+            "expectations": [
+                "A .env file exists at the app root (runtime validity: make dev's copy-env-files step has a source file to propagate)",
+                "APP_SUPERADMIN_EMAIL in .env is admin@billingstar.com (explicit non-secret user-provided value was applied)",
+                "APP_SECRET_KEY in .env is still the 'xxxx' placeholder and OPENAI_API_KEY is still the 'openai_api_key' placeholder (no secrets written)",
+                "The checklist names APP_SECRET_KEY and suggests the user generate it with a python3 secrets command they run themselves",
+                "The checklist explains make run works with the local-MongoDB DEV defaults, while make dev needs APP_DB_ENGINE_QA, APP_DB_NAME_QA and APP_DB_URI_QA",
+                "The checklist lists OPENAI_API_KEY as required only for AI features",
+                "No dependencies were installed and no server was started"
+            ]
+        }
+    ]
+}

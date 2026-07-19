@@ -1,0 +1,88 @@
+{
+    "baseUrl": "accounts",
+    "title": "Accounts",
+    "name": "Account",
+    "component": "Accounts",
+    "dbApiUrl": "accounts",
+    "fieldElements": [
+        {
+            "name": "id",
+            "required": true,
+            "label": "ID",
+            "type": "_id",
+            "readonly": true,
+            "hidden": true
+        },
+        {
+            "name": "user_id",
+            "required": true,
+            "label": "User ID",
+            "type": "text",
+            "readonly": true,
+            "hidden": true
+        },
+        {
+            "name": "code",
+            "required": true,
+            "label": "Account Code",
+            "type": "text",
+            "listing": true
+        },
+        {
+            "name": "name",
+            "required": true,
+            "label": "Account Name",
+            "type": "text",
+            "listing": true
+        },
+        {
+            "name": "type",
+            "required": true,
+            "label": "Type",
+            "type": "select",
+            "select_elements": [
+                {
+                    "title": "Asset",
+                    "value": "asset"
+                },
+                {
+                    "title": "Liability",
+                    "value": "liability"
+                },
+                {
+                    "title": "Equity",
+                    "value": "equity"
+                },
+                {
+                    "title": "Revenue",
+                    "value": "revenue"
+                },
+                {
+                    "title": "Expense",
+                    "value": "expense"
+                }
+            ],
+            "listing": true
+        },
+        {
+            "name": "creation_date",
+            "required": true,
+            "label": "Created",
+            "type": "datetime-local",
+            "readonly": true,
+            "hidden": false,
+            "default_value": "current_timestamp",
+            "listing": true
+        },
+        {
+            "name": "update_date",
+            "required": true,
+            "label": "Last update",
+            "type": "datetime-local",
+            "readonly": true,
+            "hidden": false,
+            "default_value": "current_timestamp",
+            "listing": false
+        }
+    ]
+}

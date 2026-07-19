@@ -1,0 +1,143 @@
+{
+    "baseUrl": "user_ingredients",
+    "title": "Ingredients",
+    "name": "Ingredient",
+    "component": "UserIngredients",
+    "dbApiUrl": "user_ingredients",
+    "mandatoryFilters": {
+        "user_id": "{CurrentUserId}",
+        "type": "I"
+    },
+    "defaultOrder": "name",
+    "fieldElements": [
+        {
+            "name": "id",
+            "required": true,
+            "label": "ID",
+            "type": "_id",
+            "readonly": true,
+            "hidden": true
+        },
+        {
+            "name": "user_id",
+            "required": true,
+            "label": "User ID",
+            "type": "text",
+            "readonly": true,
+            "hidden": true
+        },
+        {
+            "name": "type",
+            "required": true,
+            "label": "Type",
+            "type": "select",
+            "select_elements": "INGREDIENT_TYPE",
+            "readonly": true,
+            "hidden": false,
+            "default_value": "I"
+        },
+        {
+            "name": "name",
+            "required": true,
+            "label": "Name",
+            "type": "suggestion_dropdown",
+            "readonly": false,
+            "listing": true,
+            "suggestion_id_fieldname": "id",
+            "suggestion_desc_fieldname": "description",
+            "suggestion_name_fieldname": "food_name",
+            "filter_api_url": "fda_food_query",
+            "filter_search_param_name": "food_name",
+            "filter_search_other_param": {
+                "autocomplete": "1"
+            },
+            "autocomplete_fields": {
+                "calories_value": "calories_value",
+                "calories_unit": "calories_unit",
+                "serving_size": "serving_size",
+                "serving_size_unit": "serving_size_unit",
+                "brand_name": "brand_name"
+            },
+            "chatbot_popup": true,
+            "aux_component": "ChatBotButton",
+            "chatbot_prompt": "Give me the %s calories in KCAL including the serving size amount and serving size unit. Look first in thr FDA API, if it's not there, look for it with the web_search Tool.",
+            "google_popup": true,
+            "google_prompt": "%s calories KCAL"
+        },
+        {
+            "name": "calories_value",
+            "required": true,
+            "label": "Calories",
+            "type": "number",
+            "readonly": false,
+            "listing": true
+        },
+        {
+            "name": "calories_unit",
+            "required": true,
+            "label": "Calories Unit",
+            "type": "select",
+            "select_elements": "CALORIE_UNITS",
+            "readonly": false,
+            "listing": true,
+            "default_value": "kcal" 
+        },
+        {
+            "name": "serving_size",
+            "required": true,
+            "label": "Serving size",
+            "type": "number",
+            "readonly": false,
+            "listing": true
+        },
+        {
+            "name": "serving_size_unit",
+            "required": true,
+            "label": "Serving size unit",
+            "type": "select",
+            "select_elements": "SERVING_SIZE_UNITS",
+            "readonly": false,
+            "listing": true,
+            "default_value": "g" 
+        },
+        {
+            "name": "brand_name",
+            "required": false,
+            "label": "Brand Name",
+            "type": "text",
+            "readonly": false,
+            "listing": true
+        },
+        {
+            "name": "observations",
+            "required": false,
+            "label": "Observations",
+            "type": "textarea",
+            "readonly": false,
+            "listing": true
+        },
+        {
+            "name": "creation_date",
+            "required": true,
+            "label": "Created",
+            "type": "datetime-local",
+            "readonly": true,
+            "hidden": false,
+            "default_value": "current_timestamp",
+            "listing": true
+        },
+        {
+            "name": "update_date",
+            "required": true,
+            "label": "Last update",
+            "type": "datetime-local",
+            "readonly": true,
+            "hidden": false,
+            "default_value": "current_timestamp",
+            "listing": false
+        }
+    ],
+    "dbPreValidations": [
+        "UserIngredientsValidations"
+    ]
+}

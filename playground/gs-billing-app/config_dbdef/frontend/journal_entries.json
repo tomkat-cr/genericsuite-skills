@@ -1,0 +1,73 @@
+{
+    "baseUrl": "journal_entries",
+    "title": "Journal Entries",
+    "name": "Journal Entrie",
+    "component": "JournalEntries",
+    "dbApiUrl": "journal_entries",
+    "childComponents": [
+        "JournalLines"
+    ],
+    "fieldElements": [
+        {
+            "name": "id",
+            "required": true,
+            "label": "ID",
+            "type": "_id",
+            "readonly": true,
+            "hidden": true
+        },
+        {
+            "name": "user_id",
+            "required": true,
+            "label": "User ID",
+            "type": "text",
+            "readonly": true,
+            "hidden": true
+        },
+        {
+            "name": "date",
+            "required": true,
+            "label": "Date",
+            "type": "date",
+            "listing": true
+        },
+        {
+            "name": "description",
+            "required": true,
+            "label": "Description",
+            "type": "text",
+            "listing": true
+        },
+        {
+            "name": "status",
+            "required": true,
+            "label": "Status",
+            "type": "select",
+            "select_elements": [
+                "Draft",
+                "Posted"
+            ],
+            "listing": true
+        },
+        {
+            "name": "creation_date",
+            "required": true,
+            "label": "Created",
+            "type": "datetime-local",
+            "readonly": true,
+            "hidden": false,
+            "default_value": "current_timestamp",
+            "listing": true
+        },
+        {
+            "name": "update_date",
+            "required": true,
+            "label": "Last update",
+            "type": "datetime-local",
+            "readonly": true,
+            "hidden": false,
+            "default_value": "current_timestamp",
+            "listing": false
+        }
+    ]
+}

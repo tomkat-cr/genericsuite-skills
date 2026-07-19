@@ -1,0 +1,31 @@
+{
+    "skill_name": "python-ai-tools-code-builder",
+    "evals": [
+        {
+            "id": 1,
+            "prompt": "Create AI tools for the billing domain: (1) search_customer_invoices — search a customer's invoices by customer name (string, required); (2) get_overdue_invoice_count — count invoices past due date, no parameters. Both read the DB through the GenericSuite middleware against json_file 'invoices'. The project already has the skeleton index: copy playground/python-ai-code-builder-test/eval-1/lib/ to playground/python-ai-tools-code-builder-test/eval-1/lib/ first if it exists, otherwise copy playground/gs-billing-app/ai-fixtures/lib/ and remove the ai_gpt_fn_billing import block, functions-dict entries and cac_billing reference from the copied index to restore the empty skeleton. Project root: playground/python-ai-tools-code-builder-test/eval-1/",
+            "expected_output": "lib/models/ai_chatbot/ai_gpt_fn_billing.py with two @tool/_func pairs, and the index updated at all five registration points",
+            "files": [],
+            "expectations": [
+                "Creates lib/models/ai_chatbot/ai_gpt_fn_billing.py with search_customer_invoices, search_customer_invoices_func, get_overdue_invoice_count, get_overdue_invoice_count_func and a module-level cac = CommonAppContext()",
+                "Tool module and edited ai_gpt_fn_index.py both pass python3 -m py_compile (runtime validity)",
+                "Both tools use interpret_tool_params with a Pydantic schema and handle failures via gpt_func_error(...) or standard_gpt_func_response(...) (either canonical response idiom)",
+                "The index imports cac as cac_billing plus both tool pairs, registers both tools in BOTH is_lc branches of get_additional_functions_dict, includes cac_billing in additional_gpt_func_appcontexts, has a dispatch branch per tool in additional_run_one_function, and one spec per tool in get_additional_function_specs",
+                "Neither file imports fastapi"
+            ]
+        },
+        {
+            "id": 2,
+            "prompt": "Create an AI tool fetch_exchange_rate for the finance domain: it receives a currency code (string, required) and fetches https://api.frankfurter.dev/v1/latest?base=<code> with requests.get. The URL must be validated before fetching. Use a fresh skeleton index: copy playground/gs-billing-app/ai-fixtures/lib/ to playground/python-ai-tools-code-builder-test/eval-2/lib/ and strip the billing-specific registrations from the index first. Project root: playground/python-ai-tools-code-builder-test/eval-2/",
+            "expected_output": "lib/models/ai_chatbot/ai_gpt_fn_finance.py with the tool pair, URL guarded by is_safe_url, index registered",
+            "files": [],
+            "expectations": [
+                "Creates lib/models/ai_chatbot/ai_gpt_fn_finance.py with fetch_exchange_rate and fetch_exchange_rate_func",
+                "Both generated/edited .py files pass python3 -m py_compile (runtime validity)",
+                "The _func validates the request URL with is_safe_url before calling requests.get, and returns gpt_func_error(...) when the check fails",
+                "The index has all five registration points updated for fetch_exchange_rate",
+                "No network call is executed during generation"
+            ]
+        }
+    ]
+}

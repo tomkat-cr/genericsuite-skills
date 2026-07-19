@@ -1,0 +1,66 @@
+{
+    "baseUrl": "customers",
+    "title": "Customers",
+    "name": "Customer",
+    "component": "Customers",
+    "dbApiUrl": "customers",
+    "fieldElements": [
+        {
+            "name": "id",
+            "required": true,
+            "label": "ID",
+            "type": "_id",
+            "readonly": true,
+            "hidden": true
+        },
+        {
+            "name": "user_id",
+            "required": true,
+            "label": "User ID",
+            "type": "text",
+            "readonly": true,
+            "hidden": true
+        },
+        {
+            "name": "name",
+            "required": true,
+            "label": "Company Name",
+            "type": "text",
+            "listing": true
+        },
+        {
+            "name": "email",
+            "required": false,
+            "label": "Email",
+            "type": "email",
+            "listing": true
+        },
+        {
+            "name": "phone",
+            "required": false,
+            "label": "Phone",
+            "type": "text",
+            "listing": true
+        },
+        {
+            "name": "creation_date",
+            "required": true,
+            "label": "Created",
+            "type": "datetime-local",
+            "readonly": true,
+            "hidden": false,
+            "default_value": "current_timestamp",
+            "listing": true
+        },
+        {
+            "name": "update_date",
+            "required": true,
+            "label": "Last update",
+            "type": "datetime-local",
+            "readonly": true,
+            "hidden": false,
+            "default_value": "current_timestamp",
+            "listing": false
+        }
+    ]
+}
