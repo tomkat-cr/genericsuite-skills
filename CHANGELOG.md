@@ -31,6 +31,7 @@ This project adheres to [Semantic Versioning](http://semver.org/) and [Keep a Ch
   `playground/` [GS-254].
 - Reference-sync mechanism: `skills/update-gs-docs` map + script,
   `make sync-references` [GS-254].
+- Add SAST testing [GS-315].
 
 ### Changed
 - Marketplace plugin group `code-generation-skills` renamed to

@@ -29,7 +29,6 @@ Existing GenericSuite apps are supported too: the suite detects them and works a
 | Plugin | Skills |
 |---|---|
 | `agents-skills` | `build-agents-md` (AGENTS.md generator), `skill-creator` (meta-skill: create/test/evaluate/package skills) |
-| `release-prep-skills` | `release-notes` (bilingual EN/ES changelog entries) |
 
 ## Installation
 
