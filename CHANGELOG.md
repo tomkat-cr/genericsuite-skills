@@ -41,3 +41,6 @@ This project adheres to [Semantic Versioning](http://semver.org/) and [Keep a Ch
 
 ### Removed
 - `release-notes` skill removed from marketplace, and delete SKILL.md file (moved to GS Superproject directory) [GS-191].
+
+### Security
+- Migrate to Python 3.14 [GS-337].
