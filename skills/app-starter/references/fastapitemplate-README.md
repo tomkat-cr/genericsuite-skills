@@ -90,9 +90,10 @@ make run-db-only
 ### Prerequisites
 
 - Git
-- Node.js 18+, npm 8+
+- Node.js 26+
 - Python 3.12+, `uv`
 - Docker (or Podman)
+- Make
 
 ### Step 1 — Copy the template directory
 
