@@ -29,18 +29,24 @@ Existing GenericSuite apps are supported too: the suite detects them and works a
 | Plugin | Skills |
 |---|---|
 | `agents-skills` | `build-agents-md` (AGENTS.md generator), `skill-creator` (meta-skill: create/test/evaluate/package skills) |
-| `release-prep-skills` | `release-notes` (bilingual EN/ES changelog entries) |
 
 ## Installation
 
-**Claude Code (plugin marketplace):**
+### Claude Code
 
-```
+Using the Claude Code **plugin marketplace**:
+
+```bash
+claude
+
 /plugin marketplace add tomkat-cr/genericsuite-skills
+
 /plugin install gs-app-builder-suite@genericsuite-skills
 ```
 
-**skills CLI ([skills.sh](https://skills.sh)):**
+### Skills CLI
+
+Using the **Vercel Skills CLI ([skills.sh](https://skills.sh))**:
 
 ```bash
 npx skills add tomkat-cr/genericsuite-skills
@@ -48,11 +54,66 @@ npx skills add tomkat-cr/genericsuite-skills
 
 ## Quick start
 
+### 1. Build a Complete App (Orchestrator)
+
+Run the full interactive flow to build a greenfield app or extend an existing GenericSuite project:
+
 ```
-/gs-app-builder ./my-app "an inventory app with products and warehouses, with an AI chatbot"
+# Greenfield: Bootstrap and build a complete full-stack app
+/gs-app-builder ./my-app "an inventory management system with products and warehouses, plus an AI chatbot"
+
+# Brownfield: Add a new entity and features to an existing GenericSuite codebase
+/gs-app-builder ./ "add a suppliers entity with contact details and a custom metrics endpoint"
 ```
 
-Or run the pieces yourself: `/app-starter` to scaffold, then `/config-builder`, `/menu-builder`, `/endpoints-builder`, `/jsx-code-builder` per entity, and the AI/MCP builders when you want them.
+### 2. Step-by-Step App Builder Skills
+
+Run specific skills directly for modular or incremental updates:
+
+#### Project Scaffolding
+```
+# Bootstrap a new full-stack GenericSuite application
+/app-starter ./my-app
+```
+
+#### CRUD Entity Creation
+```
+# Generate frontend and backend config_dbdef JSON files
+/config-builder "create config_dbdef JSON files for a products entity with name, SKU, price, and stock_quantity"
+
+# Add navigation menu entry
+/menu-builder "add Products under the Inventory menu in app_main_menu.json"
+
+# Register backend API endpoints
+/endpoints-builder "register the products entity endpoints in backend/endpoints.json"
+
+# Generate React CRUD editor components
+/jsx-code-builder "generate React CRUD components for products from the frontend JSON config"
+```
+
+#### Custom Routers & AI / MCP Integration
+```
+# Generate custom FastAPI router and model abstractions
+/python-fastapi-code-builder "create a custom router for bulk stock adjustments with validation model"
+
+# Wire the AI assistant and tools into backend & frontend
+/python-ai-code-builder "wire the GenericSuite AI assistant router into the backend"
+/python-ai-tools-code-builder "generate a LangChain @tool calculate_reorder_point and register in ai_gpt_fn_index.py"
+/jsx-ai-code-builder "add the AI chatbot assistant shell and field-level AI buttons to the React UI"
+
+# Build or extend the Model Context Protocol (MCP) server
+/mcp-builder "expose the app's AI tools and CRUD endpoints via an MCP server"
+```
+
+### 3. Repository Utilities & Meta-Skills
+
+```
+# Generate or update AGENTS.md documentation for any project
+/build-agents-md ./
+
+# Create, evaluate, benchmark, or optimize a skill
+/skill-creator "create a new skill for database schema migrations"
+```
 
 ## Development
 

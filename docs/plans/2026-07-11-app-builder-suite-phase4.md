@@ -239,7 +239,7 @@ the copies.
 ## Step 5 — Install dependencies
 
 Check prerequisites first and report what's missing (do not install
-system tools yourself): git, Node.js 18+ with npm, Python 3.12+, `uv`,
+system tools yourself): git, Node.js 26+ with npm, Python 3.12+, `uv`,
 Docker (only for `make run`). Then:
 
 ```bash

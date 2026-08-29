@@ -17,7 +17,7 @@ This project adheres to [Semantic Versioning](http://semver.org/) and [Keep a Ch
 ### Security
 
 
-## [1.0.0] - 2026-07-15
+## [1.0.0] - 2026-08-30
 
 ### Added
 - Project ideation and initial development (2026-04-12) [GS-254].
@@ -31,6 +31,7 @@ This project adheres to [Semantic Versioning](http://semver.org/) and [Keep a Ch
   `playground/` [GS-254].
 - Reference-sync mechanism: `skills/update-gs-docs` map + script,
   `make sync-references` [GS-254].
+- Add SAST testing [GS-315].
 
 ### Changed
 - Marketplace plugin group `code-generation-skills` renamed to
@@ -40,3 +41,7 @@ This project adheres to [Semantic Versioning](http://semver.org/) and [Keep a Ch
 
 ### Removed
 - `release-notes` skill removed from marketplace, and delete SKILL.md file (moved to GS Superproject directory) [GS-191].
+
+### Security
+- Migrate to Python 3.14 [GS-337].
+- Bump Node.js version in .nvmrc to 26 [GS-339].
