@@ -1,0 +1,41 @@
+{
+    "skill_name": "privacy-policy-checker",
+    "evals": [
+        {
+            "id": 1,
+            "prompt": "First copy skills/privacy-policy-checker/evals/fixture-app to playground/privacy-policy-check-test/eval-1/app (leave the original untouched). Then check whether that app's privacy policy is aligned with what the app actually does. The policy is the local PRIVACY.md in the copied app root; no URL is available, so do not attempt network access, and do not run any build tooling. Write the report to playground/privacy-policy-check-test/eval-1/report.md.",
+            "expected_output": "A report at playground/privacy-policy-check-test/eval-1/report.md with a BLOCKING GAPS verdict, an alignment matrix covering every inventory item (aligned rows included), findings citing both code path:line and quoted policy text, patch-ready clause text, store form mapping, and non-policy action items",
+            "files": [],
+            "expectations": [
+                "The report's verdict line is BLOCKING GAPS (at least one row is CONTRADICTED)",
+                "The alignment matrix flags the precise-location collection in lib/services/telemetry.dart of the copied app against the policy sentence 'We do not collect your location' as CONTRADICTED, citing both the code location and the quoted policy text",
+                "The matrix flags the 'We never share, sell or rent your personal information to third parties' claim as CONTRADICTED against named third-party recipients found in the code",
+                "The matrix reports the address-book upload in lib/services/telemetry.dart (syncContactsForFriendSuggestions) as MISSING from the policy",
+                "The matrix reports voice/audio recording sent for transcription as MISSING from the policy",
+                "The report names the specific AI providers found in server/.env.example (OpenAI, Anthropic, ElevenLabs, Pinecone) rather than referring to them generically as third parties",
+                "The report flags the ENTRY_RETENTION_DAYS=0 setting as contradicting the policy's 30-day deletion promise",
+                "The matrix contains at least one COVERED row (e.g. account email, photos, or crash diagnostics), so checked-and-aligned items are distinguishable from unchecked ones (runtime validity: coverage is demonstrable, not just gap-listing)",
+                "The report includes at least one fenced block of ready-to-paste replacement policy wording, not merely a description of what should be written",
+                "The report includes a non-policy action item for the missing NSUserTrackingUsageDescription / ATT prompt given the AdMob and AD_ID usage",
+                "The report includes a Google Play Data Safety and/or Apple Privacy Nutrition Label mapping using the official category names",
+                "The report contains an explicit statement that it is not legal advice",
+                "No API key values from server/.env.example appear in the report (secrets are referenced by name only)",
+                "The shipped fixture at skills/privacy-policy-checker/evals/fixture-app is unchanged, and no build tooling was run against the copy (no .dart_tool/, pubspec.lock or local.properties created)"
+            ]
+        },
+        {
+            "id": 2,
+            "prompt": "First copy skills/privacy-policy-checker/evals/fixture-app to playground/privacy-policy-check-test/eval-2/app (leave the original untouched) and delete PRIVACY.md from the copy. Then check that app's privacy policy alignment — there is no policy URL and no policy file. Write any report to playground/privacy-policy-check-test/eval-2/report.md. Do not attempt network access, and do not run any build tooling.",
+            "expected_output": "The skill does not stop at the missing policy: it still produces the data inventory, reports that no policy exists, and OFFERS to draft a first-version policy skeleton without writing one unprompted",
+            "files": [],
+            "expectations": [
+                "The run reports that no privacy policy could be found at a URL or locally, and says so explicitly rather than inventing policy content",
+                "A data inventory was still produced, naming the AI providers, analytics/ad SDKs, permissions and collected data found in the code",
+                "The response OFFERS to draft a first-version privacy policy skeleton and does not write the draft policy without the user accepting",
+                "No file named PRIVACY.md (or any other privacy policy document) was created in playground/privacy-policy-check-test/eval-2/app",
+                "Every claimed data flow cites a path:line in the copied app",
+                "Items that cannot be confirmed from the repository (e.g. provider-side retention, encryption at rest) are marked UNVERIFIED rather than asserted or silently dropped"
+            ]
+        }
+    ]
+}

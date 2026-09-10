@@ -34,6 +34,7 @@ Each skill directory contains:
 | `skills/menu-builder/` | Adds/updates menu entries in backend/app_main_menu.json (idempotent JSON merge) |
 | `skills/python-ai-code-builder/` | Wires the GenericSuite AI assistant into a backend (router, skeleton GPT-functions index, env checklist) |
 | `skills/python-ai-tools-code-builder/` | Generates LangChain @tool/_func pairs for the AI assistant and registers them in ai_gpt_fn_index.py |
+| `skills/privacy-policy-checker/` | Checks an app's privacy policy against what the code actually collects (data inventory sweep, AI/third-party providers, store + GDPR/CCPA/COPPA requirements) and reports gaps with patch-ready clause text |
 | `skills/python-fastapi-code-builder/` | Generates custom GenericSuite FastAPI routers + abstraction-layer model modules |
 | `skills/skill-creator/` | Meta-skill for creating, testing, evaluating, and improving other skills |
 

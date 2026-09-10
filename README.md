@@ -24,6 +24,22 @@ Build a complete GenericSuite application — React frontend, FastAPI backend, J
 
 Existing GenericSuite apps are supported too: the suite detects them and works additively (idempotent JSON merges, index preservation, MCP EXTEND mode). Directories with non-GenericSuite code are refused — retrofitting (`gs-adopt`) is future scope.
 
+## The App-Delivery Suite (`gs-app-delivery-suite`)
+
+Release-readiness checks for an app that is about to ship.
+
+| Skill | Purpose |
+|---|---|
+| `privacy-policy-checker` | Compares the privacy policy against what the code actually does — data inventory sweep, AI/third-party providers, Play Data Safety + Apple Nutrition Labels + ATT, GDPR/CCPA/COPPA — and reports gaps with ready-to-paste clause text |
+
+Works on any stack (Flutter, Kotlin, Swift, React Native, web, backend), with fast paths for GenericSuite apps. It produces an alignment matrix with one row per data item — including the aligned ones — so "checked and fine" is distinguishable from "not checked".
+
+```
+/privacy-policy-checker ./my-app https://example.com/privacy
+```
+
+> Output is an engineering artifact for counsel to review, not legal advice.
+
 ## Other plugin groups
 
 | Plugin | Skills |

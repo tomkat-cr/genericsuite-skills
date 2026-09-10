@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleDisplayName</key>
+	<string>MindJournal</string>
+	<key>CFBundleIdentifier</key>
+	<string>com.lumaworks.mindjournal</string>
+	<key>CFBundleShortVersionString</key>
+	<string>2.3.1</string>
+	<key>NSCameraUsageDescription</key>
+	<string>MindJournal uses the camera to attach photos to your journal entries.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>MindJournal needs photo access to attach images to entries.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>MindJournal records your voice so entries can be transcribed.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>MindJournal tags entries with where you wrote them.</string>
+	<key>NSContactsUsageDescription</key>
+	<string>MindJournal can invite your friends to journal with you.</string>
+	<key>GADApplicationIdentifier</key>
+	<string>ca-app-pub-3940256099942544~1458002511</string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>remote-notification</string>
+	</array>
+</dict>
+</plist>

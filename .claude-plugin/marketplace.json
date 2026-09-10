@@ -6,7 +6,7 @@
   },
   "metadata": {
     "description": "GenericSuite skills",
-    "version": "1.1.0"
+    "version": "1.2.0"
   },
   "plugins": [
     {
@@ -26,6 +26,15 @@
         "./skills/python-ai-code-builder",
         "./skills/python-ai-tools-code-builder",
         "./skills/python-fastapi-code-builder"
+      ]
+    },
+    {
+      "name": "gs-app-delivery-suite",
+      "description": "GenericSuite app-delivery suite — release-readiness checks for shipping an app, starting with privacy policy alignment against the code's actual data collection, AI providers and store requirements",
+      "source": "./",
+      "strict": false,
+      "skills": [
+        "./skills/privacy-policy-checker"
       ]
     },
     {
